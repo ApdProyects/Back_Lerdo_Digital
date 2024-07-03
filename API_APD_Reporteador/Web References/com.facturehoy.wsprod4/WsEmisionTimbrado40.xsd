@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://cfdi.ws4.facturehoy.certus.com/" targetNamespace="http://cfdi.ws4.facturehoy.certus.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="EmisionTimbradoException" type="tns:EmisionTimbradoException" />
+  <xs:element name="EmitirTimbrar" type="tns:EmitirTimbrar" />
+  <xs:element name="EmitirTimbrarResponse" type="tns:EmitirTimbrarResponse" />
+  <xs:complexType name="EmitirTimbrar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="contrasenia" type="xs:string" />
+      <xs:element name="idServicio" type="xs:int" />
+      <xs:element minOccurs="0" name="xml" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EmitirTimbrarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:wsResponseBO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="wsResponseBO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="acuse" type="xs:base64Binary" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="arregloAcuse" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="cadenaOriginal" type="xs:string" />
+      <xs:element minOccurs="0" name="cadenaOriginalTimbre" type="xs:string" />
+      <xs:element name="codigoError" type="xs:int" />
+      <xs:element minOccurs="0" name="fechaHoraTimbrado" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="folioUDDI" type="xs:string" />
+      <xs:element minOccurs="0" name="isError" type="xs:boolean" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="PDF" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="rutaDescargaPDF" type="xs:string" />
+      <xs:element minOccurs="0" name="rutaDescargaXML" type="xs:string" />
+      <xs:element minOccurs="0" name="selloDigitalEmisor" type="xs:string" />
+      <xs:element minOccurs="0" name="selloDigitalTimbreSAT" type="xs:string" />
+      <xs:element minOccurs="0" name="XML" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EmisionTimbradoException">
+    <xs:sequence>
+      <xs:element name="codeException" type="xs:int" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

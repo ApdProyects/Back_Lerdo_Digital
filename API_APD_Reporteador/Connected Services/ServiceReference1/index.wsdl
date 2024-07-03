@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ext2.smsexpert.mx/soap/smsexpert" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ext2.smsexpert.mx/soap/smsexpert" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ext2.smsexpert.mx/soap/smsexpert">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="envio_smsRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="destino" type="xsd:string" />
+    <wsdl:part name="sms" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="envio_smsResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consulta_smsRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="destino" type="xsd:string" />
+    <wsdl:part name="fecha_solicitud" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consulta_smsResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="envio_sms_masivoRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="sms" type="xsd:string" />
+    <wsdl:part name="destinos" type="xsd:string" />
+    <wsdl:part name="fecha_hora" type="xsd:string" />
+    <wsdl:part name="campana" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="envio_sms_masivoResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consulta_sms_masivoRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="fecha_solicitud" type="xsd:string" />
+    <wsdl:part name="campana" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consulta_sms_masivoResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consultar_saldoRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="bolsa" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consultar_saldoResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="envio_sms_internacionalRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="destino" type="xsd:string" />
+    <wsdl:part name="codigo_pais" type="xsd:string" />
+    <wsdl:part name="sms" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="envio_sms_internacionalResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consulta_sms_internacionalRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="destino" type="xsd:string" />
+    <wsdl:part name="codigo_pais" type="xsd:string" />
+    <wsdl:part name="fecha_solicitud" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consulta_sms_internacionalResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="agregar_lista_negraRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="numeros" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="agregar_lista_negraResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="eliminar_lista_negraRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="numeros" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="eliminar_lista_negraResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consultar_lista_negraRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="consultar_lista_negraResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="pausar_envio_campanaRequest">
+    <wsdl:part name="instancia" type="xsd:string" />
+    <wsdl:part name="entidad" type="xsd:string" />
+    <wsdl:part name="usuario" type="xsd:string" />
+    <wsdl:part name="nodo" type="xsd:string" />
+    <wsdl:part name="pausar" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="pausar_envio_campanaResponse">
+    <wsdl:part name="RESULTADO" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="smsexpertPortType">
+    <wsdl:operation name="envio_sms">
+      <wsdl:input message="tns:envio_smsRequest" />
+      <wsdl:output message="tns:envio_smsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consulta_sms">
+      <wsdl:input message="tns:consulta_smsRequest" />
+      <wsdl:output message="tns:consulta_smsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="envio_sms_masivo">
+      <wsdl:input message="tns:envio_sms_masivoRequest" />
+      <wsdl:output message="tns:envio_sms_masivoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consulta_sms_masivo">
+      <wsdl:input message="tns:consulta_sms_masivoRequest" />
+      <wsdl:output message="tns:consulta_sms_masivoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultar_saldo">
+      <wsdl:input message="tns:consultar_saldoRequest" />
+      <wsdl:output message="tns:consultar_saldoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="envio_sms_internacional">
+      <wsdl:input message="tns:envio_sms_internacionalRequest" />
+      <wsdl:output message="tns:envio_sms_internacionalResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consulta_sms_internacional">
+      <wsdl:input message="tns:consulta_sms_internacionalRequest" />
+      <wsdl:output message="tns:consulta_sms_internacionalResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="agregar_lista_negra">
+      <wsdl:input message="tns:agregar_lista_negraRequest" />
+      <wsdl:output message="tns:agregar_lista_negraResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="eliminar_lista_negra">
+      <wsdl:input message="tns:eliminar_lista_negraRequest" />
+      <wsdl:output message="tns:eliminar_lista_negraResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultar_lista_negra">
+      <wsdl:input message="tns:consultar_lista_negraRequest" />
+      <wsdl:output message="tns:consultar_lista_negraResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="pausar_envio_campana">
+      <wsdl:input message="tns:pausar_envio_campanaRequest" />
+      <wsdl:output message="tns:pausar_envio_campanaResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="smsexpertBinding" type="tns:smsexpertPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="envio_sms">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/envio_sms" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consulta_sms">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/consulta_sms" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envio_sms_masivo">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/envio_sms_masivo" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consulta_sms_masivo">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/consulta_sms_masivo" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultar_saldo">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/consultar_saldo" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envio_sms_internacional">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/envio_sms_internacional" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consulta_sms_internacional">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/consulta_sms_internacional" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="agregar_lista_negra">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/agregar_lista_negra" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminar_lista_negra">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/eliminar_lista_negra" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultar_lista_negra">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/consultar_lista_negra" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pausar_envio_campana">
+      <soap:operation soapAction="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP/pausar_envio_campana" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="smsexpert">
+    <wsdl:port name="smsexpertPort" binding="tns:smsexpertBinding">
+      <soap:address location="http://ext2.smsexpert.mx/index.php?ACTION=WEBSERVICE:LOAD_NUSOAP&amp;NUSOAP=PYXTER_SMSEXPERT_EXT1_EXT:C5A.EXT.CONTROL.DOCUMENTO" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

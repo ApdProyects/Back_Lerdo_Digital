@@ -1,0 +1,16 @@
+﻿Public Class Cs_Ingreso
+    Public Property IIN_CLAVE As String = ""
+    Public Property IIN_FECALTA As String = ""
+    Public Property CDA_FOLIO As String = ""
+    Public Property IIN_SUBTOTAL As String = ""
+    Public Property IIN_DESCUENTO_IMPORTE As String = ""
+    Public Property IIN_TOTAL As String = ""
+    Public Property NOMBRE As String = ""
+    Public Property DIRECCION As String = ""
+    Public Property COLONIA As String = ""
+    Public Property MUNICIPIO As String = ""
+    Public Property ESTADO As String = ""
+    Public Property CP As String = ""
+    Public Property CELULAR As String = ""
+    Public Property GARANTIA As String = ""
+End Class

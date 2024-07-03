@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="A" Folio="APD1109008741" Fecha="2022-03-03T09:58:27" Sello="PINM2yrOCtqIY6hFRy1hfp/2s6zbrWUEHQ1QUwenvyvpe2HnPo1E8Q2HKtfazP/sjmmfVRHs+4uPdLO2Yl1muKjfeLERmYhsNlRX10Bnk6uvacEkiG1QuxSg9KE5xEIUHdzIRcMCq/JoJEWq6DexFqdHaTUFD6F+1XRufbpwW40kpCblhDij6jv2KA+y6KirN0Ns2ghXS8Cfym27pgF3hN6yb03UKvnJ62DkBtO4Dcyy4Ndzu5ZsmjKWlpOELNGK9TUgeTTUVWGS9Cy1Tm5uxn20ku57Pkn/3vrVwR3mtPOXE8xwA0uKxEjUSgL361RSuQReQ47oKKA5/GBKSdRxcQ==" FormaPago="01" NoCertificado="00001000000410501522" Certificado="MIIGaDCCBFCgAwIBAgIUMDAwMDEwMDAwMDA0MTA1MDE1MjIwDQYJKoZIhvcNAQELBQAwggGyMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMV0wWwYJKoZIhvcNAQkCDE5SZXNwb25zYWJsZTogQWRtaW5pc3RyYWNpw7NuIENlbnRyYWwgZGUgU2VydmljaW9zIFRyaWJ1dGFyaW9zIGFsIENvbnRyaWJ1eWVudGUwHhcNMTgwNDI0MTQ0NDM1WhcNMjIwNDI0MTQ0NDM1WjCCAQcxLjAsBgNVBAMTJVBSRVNJREVOQ0lBIE1VTklDSVBBTCBERSBDRCBMRVJETyBER08xLjAsBgNVBCkTJVBSRVNJREVOQ0lBIE1VTklDSVBBTCBERSBDRCBMRVJETyBER08xLjAsBgNVBAoTJVBSRVNJREVOQ0lBIE1VTklDSVBBTCBERSBDRCBMRVJETyBER08xJTAjBgNVBC0THFBNQzk1MTAxMEZFMyAvIEdVR084MTA0MTc5VjkxHjAcBgNVBAUTFSAvIEdVR084MTA0MTdNQ0xUUkwwMTEuMCwGA1UECxMlUFJFU0lERU5DSUEgTVVOSUNJUEFMIERFIENJVURBRCBMRVJETzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJZJyZNyQPAbrgHAqWKsDljoSf8GWzT1dhzJum5PdB3HbGSR393asLGOWRwXwQQSU//s3drlhVntQayD+vZew+MsRbazl3iAbZkORqu5ZvRI6VQseW3rsoNoWvcaHx4VG+1vWq5D1pkGvaDSQJgJtb4yNjYE36Z0lTw8QOKmj7W7yCpODSl0oBpOsrX6KFddrvWRT61YNE6lRjX3daI4JD2e9k0aBFRHwDC0ZSK1ZRdqQntBelGyIU8Ta+2SRIWCyzGu5gtdm0IwuD1x0g+QocvP+XnQUswVboJMOtQcQb//gjquV5S42mxViNAn9MCKnP8c5IV5TXS8fwaHLaq5tb0CAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQELBQADggIBACA/HzwuubAyXPanRsx/yPc5StmyVCKZSANy+tybLimeYedC83wBV45YUcv4jnKrXe+t+X8hkjdKKaJZgc5YyAr846DBpYR6dgfidFQC0v/yAQ5QJR+7rcLnBMgFaOapTApVC4ln7y1KvpgTMe7ovVVQ52SfGcsdfZWcY7HoxfVwriuo2nKACtfxjogwaVlA3k1hWxTrgsAm99rELIyHnYF0zK7o53USkgxWnyvxd2jmQrsDK2pvmciaPTShUa0Rh+LlyJy8YHwL+hmQ8NLXjMBJiGN+PpHGVnz7xiWot/o+d5aw2Hk7aFn4CFl75tAYHw6Z1ftPcc/5p91HAkG9QzJB47HYgrLZaRh8BDgovjtx/reYed6JRcMd6PwKlKEDpIPN91yCy4CV0miPFhgTyj6OzGSVlAEAf+A5FLnXQ/1ZEa74/gZy0ooub9x5RLKQiQaQxcSUnOO4OgpT+qF35QimXz06vFaf82ZsNRn+2SKNVhuOtf0key3DELPW77uIUWbJuX6RIYcVaepf9ZzBjFBwckxoqBVTPl9X6WlsMl8cimnIyfRINTUP9TtRztEBN3E8rd+xFt0McgtP5QsBxXcDfx6JGCuq4PYKwwsqJYUK5RJUtz6FPF+t+e0FXn1nkx+LAfG6+hZDEdMChH68d6diE53KQRL5CidREExC3o2o" CondicionesDePago="CONDICION 1" SubTotal="8015.62" Total="8015.62" Moneda="MXN" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="35150">
+  <cfdi:Emisor Nombre="PRESIDENCIA MUNICIPAL DE CD LERDO DGO" Rfc="PMC951010FE3" RegimenFiscal="603" />
+  <cfdi:Receptor Rfc="MAFM7209122U7" Nombre="MIGUEL ÁNGEL MARTINEZ FLORES " UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="80131802" NoIdentificacion="TRASDOM" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="TRANSLADO DE DOMINIO" ValorUnitario="82797.380000" Importe="82797.380000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="82797.380000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="93151611" NoIdentificacion="APOS" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="APOYOS SUBSIDIOS" ValorUnitario="-82797.380000" Importe="-82797.380000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="-82797.380000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="80131802" NoIdentificacion="DERAVA" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="DERECHO DE AVALUO" ValorUnitario="5519.830000" Importe="5519.830000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="5519.830000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="80131802" NoIdentificacion="ADI" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="ADICIONAL" ValorUnitario="1931.940000" Importe="1931.940000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1931.940000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="80131802" NoIdentificacion="REV Y CER" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="REVICION Y CERTIFICACION" ValorUnitario="563.850000" Importe="563.850000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="563.850000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+</cfdi:Comprobante>

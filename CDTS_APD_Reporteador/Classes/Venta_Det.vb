@@ -1,0 +1,20 @@
+﻿Public Class Venta_Det
+    Public Property Descripcion
+    Public Property UnidadDeMedida
+    Public Property ValorUnitario
+    Public Property Cantidad
+    Public Property Importe
+    Public Property PorcentajeIeps
+    Public Property ImporteIeps
+    Public Property PorcentajeIva
+    Public Property ImporteIva
+    Public Property ClaveProductoServicio
+    Public Property CodigoDeProducto
+    Public Property ClaveUnidadDeMedida
+    Public Property Descuento
+    Public Property Articulo
+    Public Property ClaveSAT
+    Public Property VVT_GD_DESC_IMPORTE
+    Public Property Subtotal
+    Public Property AAR_OBJETO_IMP
+End Class

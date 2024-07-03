@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://cfdi.ws4.facturehoy.certus.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="WsEmisionTimbrado40" targetNamespace="http://cfdi.ws4.facturehoy.certus.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://pruebasclientes.facturehoy.com:8080/CFDI40/WsEmisionTimbrado40?xsd=1" namespace="http://cfdi.ws4.facturehoy.certus.com/" />
+    </xsd:schema>
+  </types>
+  <message name="EmitirTimbrar">
+    <part name="parameters" element="tns:EmitirTimbrar" />
+  </message>
+  <message name="EmitirTimbrarResponse">
+    <part name="parameters" element="tns:EmitirTimbrarResponse" />
+  </message>
+  <message name="EmisionTimbradoException">
+    <part name="fault" element="tns:EmisionTimbradoException" />
+  </message>
+  <portType name="WsEmisionTimbrado40">
+    <operation name="EmitirTimbrar">
+      <input wsam:Action="http://cfdi.ws4.facturehoy.certus.com/WsEmisionTimbrado40/EmitirTimbrarRequest" message="tns:EmitirTimbrar" />
+      <output wsam:Action="http://cfdi.ws4.facturehoy.certus.com/WsEmisionTimbrado40/EmitirTimbrarResponse" message="tns:EmitirTimbrarResponse" />
+      <fault wsam:Action="http://cfdi.ws4.facturehoy.certus.com/WsEmisionTimbrado40/EmitirTimbrar/Fault/EmisionTimbradoException" name="EmisionTimbradoException" message="tns:EmisionTimbradoException" />
+    </operation>
+  </portType>
+  <binding name="WsEmisionTimbrado40PortBinding" type="tns:WsEmisionTimbrado40">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="EmitirTimbrar">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="EmisionTimbradoException">
+        <soap:fault use="literal" name="EmisionTimbradoException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="WsEmisionTimbrado40">
+    <port name="WsEmisionTimbrado40Port" binding="tns:WsEmisionTimbrado40PortBinding">
+      <soap:address location="http://pruebasclientes.facturehoy.com:8080/CFDI40/WsEmisionTimbrado40" />
+    </port>
+  </service>
+</definitions>

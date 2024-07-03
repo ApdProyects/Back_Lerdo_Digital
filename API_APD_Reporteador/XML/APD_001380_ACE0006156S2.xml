@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Serie="A" Folio="APD02000500004430" Fecha="2023-12-01T10:46:35" Sello="cvcKNgLIyb++y+KrL3SzMcmqDbTr3oc/1sWzX1SgBvRODGB2DnJZVIfTExCvZ/9dm7pbzvc42f2hkAHDtNSn0whDLbPkmiXAgfa0XHij7EKcZDGUphXEKczzIAmFVaLUNb8gWU80MY74CPI05U6I7mAuT+4og5ikUDv7sTx2cyKoeDVFr/C5KDhB3jfg/4ytgylbcFwaVtIaQ3k36CFw3lW+3J2oOCojSBvRTZIS3UEXnh+/xJreVLpUd0u6y3ncU99+72AnVed/HfCGF7FzNSZWDlXfU3Ax2YpDxf41YRCZRsQTuqPiv5ChfD/LvkGMvfu9PgeBLoSuMmmJvRmZsQ==" FormaPago="01" NoCertificado="00001000000512632117" Certificado="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" CondicionesDePago="CONDICION 1" SubTotal="242.75" Total="242.75" Moneda="MXN" TipoDeComprobante="I" Exportacion="01" MetodoPago="PUE" LugarExpedicion="35150">
+  <cfdi:Emisor Nombre="PRESIDENCIA MUNICIPAL DE CD LERDO DGO" Rfc="PMC951010FE3" RegimenFiscal="603" />
+  <cfdi:Receptor Rfc="ACE0006156S2" Nombre="ARRENDADORA CELSA" UsoCFDI="G03" DomicilioFiscalReceptor="27000" RegimenFiscalReceptor="601" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="93161700" NoIdentificacion="OTROSTESO" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="OTROS TESO" ValorUnitario="400.000000" Importe="400.000000" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="400.000000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="93161700" NoIdentificacion="OTROSTESO" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="OTROS TESO" ValorUnitario="1000.000000" Importe="1000.000000" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1000.000000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="93161700" NoIdentificacion="OTROSTESO" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="OTROS TESO" ValorUnitario="300.000000" Importe="300.000000" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="300.000000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="93161700" NoIdentificacion="OTROSTESO" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="OTROS TESO" ValorUnitario="2800.000000" Importe="2800.000000" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2800.000000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="93161700" NoIdentificacion="OTROSTESO" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="OTROS TESO" ValorUnitario="450.000000" Importe="450.000000" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="450.000000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="93161700" NoIdentificacion="OTROSTESO" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="OTROS TESO" ValorUnitario="2800.000000" Importe="2800.000000" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2800.000000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="93161700" NoIdentificacion="CONSTNOANTEC" Cantidad="1.00" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="CONSTANCIA DE NO INFRACCION" ValorUnitario="242.750000" Importe="242.750000" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="242.750000" Impuesto="002" TipoFactor="Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos>
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="7992.75" Impuesto="002" TipoFactor="Exento" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+</cfdi:Comprobante>
