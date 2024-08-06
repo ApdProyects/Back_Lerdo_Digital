@@ -1189,7 +1189,7 @@ Namespace Controllers
                 Cs_Respuesta_pago.folio = ""
             End Try
 
-            '' enviar folio a replica.
+            '' enviar folio a replica. METODO PARA PAGAR. AGREGADO EN ABRIL 2024
             Try
                 If id_depto = 2 Or id_depto = 34 Then
                     'notas este SP corre en el servidor de mutipagos.
@@ -1207,7 +1207,7 @@ Namespace Controllers
             Catch ex As Exception
                 Cs_Respuesta_pago.mensaje = Cs_Respuesta_pago.mensaje + " || " + "Error, " + ex.Message
             End Try
-
+            '/* AGREGADO EN ABRIL 2024*/
             Return Cs_Respuesta_pago
         End Function
 

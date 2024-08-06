@@ -22,14 +22,16 @@ Imports API_APD_Reporteador.com.facturehoy.wsprod3
 Imports System.Diagnostics.Eventing.Reader
 Imports System.Web.UI.WebControls.Expressions
 Imports System.Resources
+Imports System.Globalization
 
 Namespace Controllers
 
     <EnableCors("*", "*", "*")>
     Public Class FacturacionController
         Inherits ApiController
-        Dim Mdl_Facturacion As New Mdl_Facturacion
+        Dim culture As CultureInfo = New CultureInfo("en-US") '' AGREGAMOS EL INTERVALO DE REGION NESESARIA PARA GENERAR EL ARCIVO.
 
+        Dim Mdl_Facturacion As New Mdl_Facturacion
         'Const URI_SAT = "http://www.sat.gob.mx/cfd/3"
         'Const xsi = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
 
@@ -1416,7 +1418,8 @@ Namespace Controllers
                 'Dim quepasscertus As String = "Prueba$1"
                 'Dim queproceso As Integer = "194876591"
                 'Dim MemStream As System.IO.MemoryStream = FileToMemory(ModuloGeneral.CarpetaAlmacenXML & "\" & ModuloGeneral.SeriePrefijo & CStr(folio) & ".xml") 'buscar archivo ya timbrado 
-                Dim MemStream As System.IO.MemoryStream = FileToMemory(HttpContext.Current.Request.PhysicalApplicationPath + "XML" & "\APD_" & String.Format("{0:000000}", Convert.ToInt32(FE_NumFacturita)) & "_" & CStr(RFC) & ".xml") 'buscar archivo ya timbrado
+                Dim MemStream As MemoryStream  'buscar archivo Para timbrar.
+                MemStream = FileToMemory(HttpContext.Current.Request.PhysicalApplicationPath + "XML" & "\APD_" & String.Format("{0:000000}", Convert.ToInt32(FE_NumFacturita)) & "_" & CStr(RFC) & ".xml")
                 Dim archivo As Byte() = MemStream.ToArray()
 
                 ServicePointManager.Expect100Continue = True
@@ -1455,6 +1458,7 @@ Namespace Controllers
                 Else
                     Dim SOLUCION As String
                     Dim correcto As Boolean = False
+                    '/******************************************** SE COMENTO TODO ESTE BLOQUE PARA PODER VER EL ERROR COMPLETO DE PUERTO. ********************************************/
                     '/*     ENVIAR WHATS APP CON EL ERROR A CLAUDIA     */
                     Try
                         'puerto.codigoError
@@ -1494,12 +1498,10 @@ Namespace Controllers
                         puerto.message = "El Regimen Fiscal del Receptor no es valido."
                         error_message = True
                     End If
-
                     If puerto.message.Contains("'FormaPago' del elemento 'cfdi:Comprobante' debe contener") Then
                         puerto.message = "La Forma de Pago " & Fe_Txt_FormaPago & " no es valido. para el metodo de pago " & Fe_Txt_MetodoPago
                         error_message = True
                     End If
-
                     If error_message = False And correcto = False Then
                         puerto.message = "Verifique los datos de Facturación o comunicarse al CALL CENTER de Lerdo Digital (871) 134-8604."
                     End If
@@ -1508,9 +1510,7 @@ Namespace Controllers
                     Cs_Respuesta_Folios.codigo = 0
                     Cs_Respuesta_Folios.codigoError = 400
                     Cs_Respuesta_Folios.mensaje = "Facturación no exitosa, " + puerto.message
-
-
-
+                    Cs_Respuesta_Folios.objetoError = puerto
                     Return Cs_Respuesta_Folios
 
                 End If
@@ -1645,8 +1645,11 @@ Namespace Controllers
                 CUERPO_PDF = CUERPO_PDF.Replace("[METODO_PAGO_TEXTO]", Fe_Txt_MetodoPago)
                 CUERPO_PDF = CUERPO_PDF.Replace("[VersionFE]", ModuloGeneral.VersionFE)
                 CUERPO_PDF = CUERPO_PDF.Replace("[UsoCFDI]", UsoCFDI)
-                CUERPO_PDF = CUERPO_PDF.Replace("[FormatCurrency(0)]", FormatCurrency(0))
-                CUERPO_PDF = CUERPO_PDF.Replace("[FE_ImporteTotal]", FormatCurrency(FE_ImporteTotal))
+                'CDbl(FE_ImporteFactura).ToString("0.00", culture)
+                'CUERPO_PDF = CUERPO_PDF.Replace("[FormatCurrency(0)]", FormatCurrency(0))
+                'CUERPO_PDF = CUERPO_PDF.Replace("[FE_ImporteTotal]", FormatCurrency(FE_ImporteTotal))
+                CUERPO_PDF = CUERPO_PDF.Replace("[FormatCurrency(0)]", "$" + CDbl(0).ToString("0.00", culture))
+                CUERPO_PDF = CUERPO_PDF.Replace("[FE_ImporteTotal]", "$" + CDbl(FE_ImporteTotal).ToString("0.00", culture))
                 CUERPO_PDF = CUERPO_PDF.Replace("[NoCertificado]", NoCertificado)
                 CUERPO_PDF = CUERPO_PDF.Replace("[NoCertificadoSAT]", NoCertificadoSAT)
                 CUERPO_PDF = CUERPO_PDF.Replace("[SelloCFD]", SelloCFD)
@@ -1663,9 +1666,12 @@ Namespace Controllers
                     interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Cantidad]", CInt(p.Cantidad).ToString())
                     interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.UnidadDeMedida]", p.UnidadDeMedida)
                     interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Descripcion]", p.Descripcion)
-                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Subtotal]", FormatCurrency(p.Subtotal))
-                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.VVT_GD_DESC_IMPORTE]", FormatCurrency(p.VVT_GD_DESC_IMPORTE))
-                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Importe]", FormatCurrency(p.Importe))
+                    'interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Subtotal]", FormatCurrency(p.Subtotal))
+                    'interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.VVT_GD_DESC_IMPORTE]", FormatCurrency(p.VVT_GD_DESC_IMPORTE))
+                    'interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Importe]", FormatCurrency(p.Importe))
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Subtotal]", "$" + CDbl(p.Subtotal).ToString("0.00", culture))
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.VVT_GD_DESC_IMPORTE]", "$" + CDbl(p.VVT_GD_DESC_IMPORTE).ToString("0.00", culture))
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Importe]", "$" + CDbl(p.Importe).ToString("0.00", culture))
                     'insertamos el string en la tabla
                     TablaProductos = TablaProductos + interacion_Productos_PDF_aux
                 Next
@@ -1765,117 +1771,109 @@ Namespace Controllers
         'Nueva Facturacion 
         'EnviarFactura
         <HttpGet>
-		<Route("api/Facturacion/TesteEstructura")>
-		Public Function testestructura() As String
-
-			Try
-				Dim html = "<html lang='es'>"
-				''SE PASO TODO EL HTML A VARIABLES
-				Dim CUERPO_PDF = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT TOP 1 AFE_HTML_BODY FROM [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 1")
-				Dim interacion_Productos_PDF As String = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT  TOP 1 AFE_HTML_INTERACION1 FROM  [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 1")
-				Dim interacion_Productos_PDF_aux As String = ""
-				Dim interacion_Catastrales_PDF As String = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT TOP 1 AFE_HTML_INTERACION2 FROM  [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 1")
-				Dim interacion_Catastrales_PDF_aux As String = ""
-				Dim TablaProductos As String = ""       '' Remplaza [TablaProductos]
-				Dim ClabesCatastrales As String = ""    '' Remplaza [ClabesCatastrales]
-				''correcion del texto del pdf.
-				CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorNombre]", "Fernando MARTINEZ")
-				CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioCalle]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioCp]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioMunicipio]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioEstado]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorRfc]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorRegimenFiscal_descripcion]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[VentaDiaria]", 1)
-				CUERPO_PDF = CUERPO_PDF.Replace("[FechaActual]", Now.ToString("dd/MM/yyyy"))
-				CUERPO_PDF = CUERPO_PDF.Replace("[Fechacertificacion]", Convert.ToDateTime(Now).ToString("dd/MM/yyyy HH:mm:ss"))
-				CUERPO_PDF = CUERPO_PDF.Replace("[UUID]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[codigoB64]", "")
-				CUERPO_PDF = CUERPO_PDF.Replace("[numero2letras]", "")
+        <Route("api/Facturacion/TesteEstructura")>
+        Public Function testestructura() As String
+            Dim htmlString As String = ""
+            Try
+                Dim html = "<html lang='es'>"
+                ''SE PASO TODO EL HTML A VARIABLES
+                Dim CUERPO_PDF = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT TOP 1 AFE_HTML_BODY FROM [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 1")
+                Dim interacion_Productos_PDF As String = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT  TOP 1 AFE_HTML_INTERACION1 FROM  [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 1")
+                Dim interacion_Productos_PDF_aux As String = ""
+                Dim interacion_Catastrales_PDF As String = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT TOP 1 AFE_HTML_INTERACION2 FROM  [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 1")
+                Dim interacion_Catastrales_PDF_aux As String = ""
+                Dim TablaProductos As String = ""       '' Remplaza [TablaProductos]
+                Dim ClabesCatastrales As String = ""    '' Remplaza [ClabesCatastrales]
+                ''correcion del texto del pdf.
+                CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorNombre]", "Fernando MARTINEZ")
+                CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioCalle]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioCp]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioMunicipio]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorDomicilioEstado]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorRfc]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[ReceptorRegimenFiscal_descripcion]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[VentaDiaria]", 1)
+                CUERPO_PDF = CUERPO_PDF.Replace("[FechaActual]", Now.ToString("dd/MM/yyyy"))
+                CUERPO_PDF = CUERPO_PDF.Replace("[Fechacertificacion]", Convert.ToDateTime(Now).ToString("dd/MM/yyyy HH:mm:ss"))
+                CUERPO_PDF = CUERPO_PDF.Replace("[UUID]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[codigoB64]", "")
+                CUERPO_PDF = CUERPO_PDF.Replace("[numero2letras]", "")
                 CUERPO_PDF = CUERPO_PDF.Replace("[Fe_Txt_FormaPago]", "")
                 CUERPO_PDF = CUERPO_PDF.Replace("[METODO_PAGO_TEXTO]", Fe_Txt_MetodoPago)
                 CUERPO_PDF = CUERPO_PDF.Replace("[UsoCFDI]", "")
-				CUERPO_PDF = CUERPO_PDF.Replace("[VersionFE]", "")
-				CUERPO_PDF = CUERPO_PDF.Replace("[FormatCurrency(0)]", FormatCurrency(0))
-				CUERPO_PDF = CUERPO_PDF.Replace("[FE_ImporteTotal]", FormatCurrency(10))
-				CUERPO_PDF = CUERPO_PDF.Replace("[NoCertificado]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[NoCertificadoSAT]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[SelloCFD]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[SelloSAT]", "XD")
-				CUERPO_PDF = CUERPO_PDF.Replace("[CadenaOriginalTimbre]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[VersionFE]", "")
+                CUERPO_PDF = CUERPO_PDF.Replace("[FormatCurrency(0)]", "$" + CDbl(0).ToString("0.00", culture))
+                CUERPO_PDF = CUERPO_PDF.Replace("[FE_ImporteTotal]", "$" + CDbl(10).ToString("0.00", culture))
+                CUERPO_PDF = CUERPO_PDF.Replace("[NoCertificado]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[NoCertificadoSAT]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[SelloCFD]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[SelloSAT]", "XD")
+                CUERPO_PDF = CUERPO_PDF.Replace("[CadenaOriginalTimbre]", "XD")
 
-				' insersion de intereacion de la tabla 
-				For i = 0 To 10
-					'cargamos el string
-					interacion_Productos_PDF_aux = interacion_Productos_PDF
-					'corregimos el string 
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Articulo]", i.ToString())
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.ClaveSAT]", i.ToString())
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Cantidad]", CInt(i).ToString())
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.UnidadDeMedida]", i.ToString())
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Descripcion]", i.ToString())
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Subtotal]", FormatCurrency(i))
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.VVT_GD_DESC_IMPORTE]", FormatCurrency(i))
-					interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Importe]", FormatCurrency(i))
-					'insertamos el string en la tabla
-					TablaProductos = TablaProductos + interacion_Productos_PDF_aux
-				Next
-				CUERPO_PDF = CUERPO_PDF.Replace("[TablaProductos]", TablaProductos)
+                ' insersion de intereacion de la tabla 
+                For i = 0 To 10
+                    'cargamos el string
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF
+                    'corregimos el string 
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Articulo]", i.ToString())
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.ClaveSAT]", i.ToString())
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Cantidad]", CInt(i).ToString())
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.UnidadDeMedida]", i.ToString())
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Descripcion]", i.ToString())
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Subtotal]", "$" + CDbl(i).ToString("0.00", culture))
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.VVT_GD_DESC_IMPORTE]", "$" + CDbl(i).ToString("0.00", culture))
+                    interacion_Productos_PDF_aux = interacion_Productos_PDF_aux.Replace("[p.Importe]", "$" + CDbl(i).ToString("0.00", culture))
+                    'insertamos el string en la tabla
+                    TablaProductos = TablaProductos + interacion_Productos_PDF_aux
+                Next
+                CUERPO_PDF = CUERPO_PDF.Replace("[TablaProductos]", TablaProductos)
 
-				''insercion de clave catastral
-				For i = 0 To 5
-					If (i Mod 2 = 0) Then
-						'cargamos el string
-						interacion_Catastrales_PDF_aux = interacion_Catastrales_PDF
-						'corregimos el string
-						interacion_Catastrales_PDF_aux = interacion_Catastrales_PDF_aux.Replace("[clave_Catastral]", i)
-						'insertamos el string en la tabla
-						ClabesCatastrales = ClabesCatastrales + interacion_Catastrales_PDF_aux
-					End If
-				Next
-
-				CUERPO_PDF = CUERPO_PDF.Replace("[ClabesCatastrales]", ClabesCatastrales)
-
-				Dim htmlString As String = CUERPO_PDF
-				Dim pdf_page_size As String = "A4"
-				Dim pageSize As PdfPageSize = DirectCast([Enum].Parse(GetType(PdfPageSize),
-				pdf_page_size, True), PdfPageSize)
-				Dim pdf_orientation As String = "Portrait"
-				Dim pdfOrientation As PdfPageOrientation = DirectCast(
-				[Enum].Parse(GetType(PdfPageOrientation),
-				pdf_orientation, True), PdfPageOrientation)
-				Dim webPageWidth As Integer = 1024
-				Try
-					webPageWidth = Convert.ToInt32(1024)
-				Catch
-				End Try
-				Dim webPageHeight As Integer = 0
-				Try
-					webPageHeight = Convert.ToInt32(768)
-				Catch
-				End Try
-				Dim converter As New HtmlToPdf()
-				converter.Options.PdfPageSize = pageSize
-				converter.Options.PdfPageOrientation = pdfOrientation
-				converter.Options.WebPageWidth = webPageWidth
-				converter.Options.WebPageHeight = webPageHeight
-
-				Dim doc As PdfDocument = converter.ConvertHtmlString(htmlString)
-				doc.Save(HttpContext.Current.Request.PhysicalApplicationPath + "XML\" & "APD_TEST_01.pdf")
-				doc.Close()
-
-                Return CUERPO_PDF
-			Catch ex As Exception
-				Return "NO EXITOSO"
-			End Try
-
+                ''insercion de clave catastral
+                For i = 0 To 5
+                    If (i Mod 2 = 0) Then
+                        'cargamos el string
+                        interacion_Catastrales_PDF_aux = interacion_Catastrales_PDF
+                        'corregimos el string
+                        interacion_Catastrales_PDF_aux = interacion_Catastrales_PDF_aux.Replace("[clave_Catastral]", i)
+                        'insertamos el string en la tabla
+                        ClabesCatastrales = ClabesCatastrales + interacion_Catastrales_PDF_aux
+                    End If
+                Next
+                CUERPO_PDF = CUERPO_PDF.Replace("[ClabesCatastrales]", ClabesCatastrales)
+                htmlString = CUERPO_PDF
+                Dim pdf_page_size As String = "A4"
+                Dim pageSize As PdfPageSize = DirectCast([Enum].Parse(GetType(PdfPageSize),
+pdf_page_size, True), PdfPageSize)
+                Dim pdf_orientation As String = "Portrait"
+                Dim pdfOrientation As PdfPageOrientation = DirectCast(
+[Enum].Parse(GetType(PdfPageOrientation),
+                pdf_orientation, True), PdfPageOrientation)
+                Dim webPageWidth As Integer = 1024
+                Try
+                    webPageWidth = Convert.ToInt32(1024)
+                Catch
+                End Try
+                Dim webPageHeight As Integer = 0
+                Try
+                    webPageHeight = Convert.ToInt32(768)
+                Catch
+                End Try
+                Dim converter As New HtmlToPdf()
+                converter.Options.PdfPageSize = pageSize
+                converter.Options.PdfPageOrientation = pdfOrientation
+                converter.Options.WebPageWidth = webPageWidth
+                converter.Options.WebPageHeight = webPageHeight
+                Dim doc As PdfDocument = converter.ConvertHtmlString(htmlString)
+                doc.Save(HttpContext.Current.Request.PhysicalApplicationPath + "\XML\" & "APD_TEST_01.pdf")
+                doc.Close()
+                Return htmlString
+            Catch ex As Exception
+                Return htmlString + ": ERROR: " + ex.Message
+            End Try
         End Function
-
-
-		Private Function ValidaConsulta(ByVal ModuloGeneral As ModuloGeneral) As String
+        Private Function ValidaConsulta(ByVal ModuloGeneral As ModuloGeneral) As String
             Dim Mensaje As String = ""
             Dim i As Integer = 0
-
             If Trim(ModuloGeneral.EmisorNombre) = "" Then
                 Mensaje = Mensaje & vbCrLf & "" & "Nombre del emisor"
             ElseIf Trim(ModuloGeneral.EmisorDomicilioCalle) = "" Then
@@ -2086,8 +2084,8 @@ Namespace Controllers
             Nodo.SetAttribute("Certificado", "")
             Nodo.SetAttribute("CondicionesDePago", FE_CondicionesPago) 'CREDITO, CONTADO, CREDITO A 3 MESES ETC
             ''--Nodo.SetAttribute("SubTotal", FE_ImporteFactura)
-            Nodo.SetAttribute("SubTotal", Format(CDbl(FE_ImporteFactura), "0.00"))
-            Nodo.SetAttribute("Total", Format(CDbl(FE_ImporteTotal), "0.00"))
+            Nodo.SetAttribute("SubTotal", CDbl(FE_ImporteFactura).ToString("0.00", culture))
+            Nodo.SetAttribute("Total", CDbl(FE_ImporteTotal).ToString("0.00", culture))
             Nodo.SetAttribute("Moneda", "MXN")
             Nodo.SetAttribute("TipoDeComprobante", ModuloGeneral.TipoDeComprobante)
             Nodo.SetAttribute("Exportacion", ModuloGeneral.EmisorEXPORTACION)
@@ -2245,17 +2243,17 @@ Namespace Controllers
                 Concepto = CrearNodo("cfdi:Concepto")
                 Concepto.SetAttribute("ClaveProdServ", p.ClaveProductoServicio)
                 Concepto.SetAttribute("NoIdentificacion", p.CodigoDeProducto)
-                Concepto.SetAttribute("Cantidad", p.Cantidad)
+                Concepto.SetAttribute("Cantidad", CDbl(p.Cantidad).ToString("0.00", culture))
                 Concepto.SetAttribute("ClaveUnidad", p.ClaveUnidadDeMedida)
                 Concepto.SetAttribute("Unidad", p.UnidadDeMedida)
                 Concepto.SetAttribute("Descripcion", p.Descripcion)
-                Concepto.SetAttribute("ValorUnitario", Format(CDbl(p.ValorUnitario), "0.000000"))
-                Concepto.SetAttribute("Importe", Format(CDbl(p.Importe), "0.000000"))
+                Concepto.SetAttribute("ValorUnitario", CDbl(p.ValorUnitario).ToString("0.000000", culture))
+                Concepto.SetAttribute("Importe", CDbl(p.Importe).ToString("0.000000", culture))
                 ''If Descuento(c) <0 Then
                 ''    Concepto.SetAttribute("Descuento", Importe(c) * (Descuento(c) / 100))
                 ''End If
                 If p.Descuento > 0 Then
-                    DescuentoDetalle = Format(CDbl(p.ValorUnitario * (p.Descuento / 100) * p.Cantidad), "0.000000")
+                    DescuentoDetalle = CDbl(p.ValorUnitario * (p.Descuento / 100) * p.Cantidad).ToString("0.000000", culture)
                     Concepto.SetAttribute("Descuento", DescuentoDetalle)
                 End If
                 'Xml 4.0
@@ -2280,10 +2278,10 @@ Namespace Controllers
                         ''Else
                         If p.Descuento > 0 Then
                             'Traslado.SetAttribute("Base", Format(CDbl(Importe(c)), "0.00"))
-                            Traslado.SetAttribute("Base", Format(CDbl((p.ValorUnitario * p.Cantidad) - DescuentoDetalle), "0.000000"))
+                            Traslado.SetAttribute("Base", CDbl((p.ValorUnitario * p.Cantidad) - DescuentoDetalle).ToString("0.000000", culture))
                         Else
                             'Traslado.SetAttribute("Base", Format(CDbl(Importe(c)), "0.00"))
-                            Traslado.SetAttribute("Base", Format(CDbl(p.ValorUnitario * p.Cantidad), "0.000000"))
+                            Traslado.SetAttribute("Base", CDbl(p.ValorUnitario * p.Cantidad).ToString("0.000000", culture))
                         End If
                         ''End If
                         Traslado.SetAttribute("Impuesto", "002")
@@ -2295,12 +2293,12 @@ Namespace Controllers
                             'Traslado.SetAttribute("TasaOCuota", String.Format("{0:000000}", PorcentajeIva(c)))
                             Traslado.SetAttribute("TasaOCuota", Convert.ToString(p.PorcentajeIva) & "0000")
                             'Traslado.SetAttribute("Importe", Format(CDbl(ImporteIva(c)), "#.#000"))
-                            Traslado.SetAttribute("Importe", Format(CDbl(p.ImporteIva), "0.000000"))
+                            Traslado.SetAttribute("Importe", CDbl(p.ImporteIva).ToString("0.000000", culture))
                             IMPORTE_TASA += CDbl(p.ValorUnitario * p.Cantidad)
                         ElseIf p.ImporteIva = 0 Then
                             Traslado.SetAttribute("TipoFactor", "Tasa")
                             Traslado.SetAttribute("TasaOCuota", "0.000000")
-                            Traslado.SetAttribute("Importe", Format(CDbl(p.ImporteIva), "0.000000"))
+                            Traslado.SetAttribute("Importe", CDbl(p.ImporteIva).ToString("0.000000", culture))
                         End If
                         Traslados.AppendChild(Traslado)
                     End If
@@ -2385,14 +2383,14 @@ Namespace Controllers
 
             If IMPORTE_EXENTO > 0 Then
                 Traslado = CrearNodo("cfdi:Traslado")
-                Traslado.SetAttribute("Base", Format(CDbl(IMPORTE_EXENTO), "0.00"))
+                Traslado.SetAttribute("Base", CDbl(IMPORTE_EXENTO).ToString("0.00", culture))
                 Traslado.SetAttribute("Impuesto", "002")
                 Traslado.SetAttribute("TipoFactor", "Exento")
                 Traslados.AppendChild(Traslado)
             End If
             If IMPORTE_TASA > 0 Then
                 Traslado = CrearNodo("cfdi:Traslado")
-                Traslado.SetAttribute("Base", Format(CDbl(IMPORTE_TASA), "0.00"))
+                Traslado.SetAttribute("Base", CDbl(IMPORTE_TASA).ToString("0.00", culture))
                 Traslado.SetAttribute("Impuesto", "002")
                 Traslado.SetAttribute("TipoFactor", "Tasa")
                 Traslado.SetAttribute("TasaOCuota", "0.160000")
@@ -2512,49 +2510,49 @@ Namespace Controllers
             Dim isValid As Boolean = privateKey1.VerifyData(stringCadenaOriginal, "SHA256", signature)
             GenerarSelloConPfx = sello256
         End Function
-		''--SCH
-		Function ReadFile(ByVal strArchivo As String) As Byte()
-			Dim f As New FileStream(strArchivo, FileMode.Open, FileAccess.Read)
-			Dim size As Integer = CInt(f.Length)
-			Dim data As Byte() = New Byte(size - 1) {}
-			size = f.Read(data, 0, size)
-			f.Close()
-			Return data
-		End Function
+        ''--SCH
+        Function ReadFile(ByVal strArchivo As String) As Byte()
+            Dim f As New FileStream(strArchivo, FileMode.Open, FileAccess.Read)
+            Dim size As Integer = CInt(f.Length)
+            Dim data As Byte() = New Byte(size - 1) {}
+            size = f.Read(data, 0, size)
+            f.Close()
+            Return data
+        End Function
 
-		''--SCH 2021/10/30 Se comento por que es por chilkat
-		''''        Private Function GenerarSello() As String
-		''''            Try
-		''''                ''--SCH
-		''''                ''Dim objCertPfx As New X509Certificate2("C:\APD\02_DOCUMENTOS\08_FE\01_PKI\00001000000405844691.pfx", "SER09112")
-		''''                ''Dim lRSA As RSACryptoServiceProvider = objCertPfx.PrivateKey
-		''''                ''Dim lhasher As New SHA1CryptoServiceProvider()
-		''''                ''Dim bytesFirmados As Byte() = lRSA.SignData(System.Text.Encoding.UTF8.GetBytes(GetCadenaOriginal(m_xmlDOM.InnerXml)), lhasher)
-		''''                ''Return Convert.ToBase64String(bytesFirmados)
+        ''--SCH 2021/10/30 Se comento por que es por chilkat
+        ''''        Private Function GenerarSello() As String
+        ''''            Try
+        ''''                ''--SCH
+        ''''                ''Dim objCertPfx As New X509Certificate2("C:\APD\02_DOCUMENTOS\08_FE\01_PKI\00001000000405844691.pfx", "SER09112")
+        ''''                ''Dim lRSA As RSACryptoServiceProvider = objCertPfx.PrivateKey
+        ''''                ''Dim lhasher As New SHA1CryptoServiceProvider()
+        ''''                ''Dim bytesFirmados As Byte() = lRSA.SignData(System.Text.Encoding.UTF8.GetBytes(GetCadenaOriginal(m_xmlDOM.InnerXml)), lhasher)
+        ''''                ''Return Convert.ToBase64String(bytesFirmados)
 
-		''''                Dim pkey As New Chilkat.PrivateKey
-		''''                Dim pkeyXml As String
-		''''                Dim rsa As New Chilkat.Rsa
-		''''                pkey.LoadPkcs8EncryptedFile(ModuloGeneral.LlavePrivada, ModuloGeneral.ContraseñaLlavePrivada)
-		''''                pkeyXml = pkey.GetXml()
-		''''                rsa.UnlockComponent(CK_KEY)
-		''''                rsa.ImportPrivateKey(pkeyXml)
-		''''                rsa.Charset = "utf-8"
-		''''                rsa.EncodingMode = "base64"
-		''''                rsa.LittleEndian = 0
-		''''                Dim base64Sig As String
-		''''                base64Sig = rsa.SignStringENC(GetCadenaOriginal(m_xmlDOM.InnerXml), "sha256")
-		''''                Dim Prueba1 As String = "MX7pXYsjwzPzuLaj9/cy80bVb0YQ35pnt4zNd6RAe7+VOsB3SVzbjenfCkuiS+prE6Q8W9Iw/9Xax13ct2ftMPl9iZQYGEMazWBNspFeXH2MZ1nMu9lsiNcNqIf2G2SOrjsHIgkcUArYhaxBJokLEWHZ7cZawT74w4+D+RP8cGjJS11GDibmCduQHPB7fdgXj5e5sm4JUO1X74azdrP5rZmXaaEGuFzsD1IDUkzCg//drar7lGikYMVrgxDEYsUEzWgfkbOiAAeQ1sirBVcKgT6CnfgY/CE7jc+Pi5FR1B3AAUNmOoiWcc9DrMxP0T+a9QmHiv1e0BVvieCPHTbAfw=="
-		''''                GenerarSello = base64Sig
+        ''''                Dim pkey As New Chilkat.PrivateKey
+        ''''                Dim pkeyXml As String
+        ''''                Dim rsa As New Chilkat.Rsa
+        ''''                pkey.LoadPkcs8EncryptedFile(ModuloGeneral.LlavePrivada, ModuloGeneral.ContraseñaLlavePrivada)
+        ''''                pkeyXml = pkey.GetXml()
+        ''''                rsa.UnlockComponent(CK_KEY)
+        ''''                rsa.ImportPrivateKey(pkeyXml)
+        ''''                rsa.Charset = "utf-8"
+        ''''                rsa.EncodingMode = "base64"
+        ''''                rsa.LittleEndian = 0
+        ''''                Dim base64Sig As String
+        ''''                base64Sig = rsa.SignStringENC(GetCadenaOriginal(m_xmlDOM.InnerXml), "sha256")
+        ''''                Dim Prueba1 As String = "MX7pXYsjwzPzuLaj9/cy80bVb0YQ35pnt4zNd6RAe7+VOsB3SVzbjenfCkuiS+prE6Q8W9Iw/9Xax13ct2ftMPl9iZQYGEMazWBNspFeXH2MZ1nMu9lsiNcNqIf2G2SOrjsHIgkcUArYhaxBJokLEWHZ7cZawT74w4+D+RP8cGjJS11GDibmCduQHPB7fdgXj5e5sm4JUO1X74azdrP5rZmXaaEGuFzsD1IDUkzCg//drar7lGikYMVrgxDEYsUEzWgfkbOiAAeQ1sirBVcKgT6CnfgY/CE7jc+Pi5FR1B3AAUNmOoiWcc9DrMxP0T+a9QmHiv1e0BVvieCPHTbAfw=="
+        ''''                GenerarSello = base64Sig
 
-		''''            Catch oExcep As Exception
-		''''                ' MsgBox(oExcep.Message)
-		''''            Finally
+        ''''            Catch oExcep As Exception
+        ''''                ' MsgBox(oExcep.Message)
+        ''''            Finally
 
-		''''            End Try
-		''''#Disable Warning BC42105 ' La función 'GenerarSello' no devuelve un valor en todas las rutas de acceso de código. Puede producirse una excepción de referencia NULL en tiempo de ejecución cuando se use el resultado.
-		''''        End Function
-		Public Function GetCadenaOriginal(ByVal xmlCFD As String) As String
+        ''''            End Try
+        ''''#Disable Warning BC42105 ' La función 'GenerarSello' no devuelve un valor en todas las rutas de acceso de código. Puede producirse una excepción de referencia NULL en tiempo de ejecución cuando se use el resultado.
+        ''''        End Function
+        Public Function GetCadenaOriginal(ByVal xmlCFD As String) As String
             Dim xslt As New System.Xml.Xsl.XslCompiledTransform
             Dim xmldoc As New System.Xml.XmlDocument
             Dim navigator As System.Xml.XPath.XPathNavigator
@@ -2562,7 +2560,6 @@ Namespace Controllers
             xmldoc.LoadXml(xmlCFD)
             navigator = xmldoc.CreateNavigator()
             xslt.Load(HttpContext.Current.Request.PhysicalApplicationPath + "XML\" & NOMBRE_XSLT_4_0)
-
             xslt.Transform(navigator, Nothing, output)
             GetCadenaOriginal = output.ToString
             'FrmApartirDeCadenaOriginal.TxtCadenaOriginalFinal.Text = GetCadenaOriginal
@@ -2688,8 +2685,8 @@ Namespace Controllers
         Private Sub GuardarCBidimensional(ByVal CodBidimMs, ByVal VVD_CLAVE)
             Try
                 Dim SentSQL As String = ""
-				SentSQL = "UPDATE [APDSGEDB_PL].[dbo].VTA_10_VD_FACTURACION SET VVD_CODIGO_BIDIMENSIONAL=@IMAGEN WHERE VVD_CLAVE=" & VVD_CLAVE & ""
-				Mdl_Facturacion.ACTUALIZAR_CODIGO_BIDIMENSIONAL(SentSQL, CodBidimMs)
+                SentSQL = "UPDATE [APDSGEDB_PL].[dbo].VTA_10_VD_FACTURACION SET VVD_CODIGO_BIDIMENSIONAL=@IMAGEN WHERE VVD_CLAVE=" & VVD_CLAVE & ""
+                Mdl_Facturacion.ACTUALIZAR_CODIGO_BIDIMENSIONAL(SentSQL, CodBidimMs)
 
             Catch Excep As Exception
                 Throw Excep
@@ -2710,16 +2707,16 @@ Namespace Controllers
 
         '/*USADO PARA NUEVA FACTURACION*/
         Public Function RENVIO_ENVIAR_CORREO(ByVal EMAIL_ENCABEZADO As String, ByVal EMAIL_DESTINATARIO As String, ByVal archivopdf As String, ByVal archivoxml As String) As String
-			Try
-				Dim EMAIL_CUERPO As String = ""
-				EMAIL_CUERPO = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT AFE_HTML_BODY FROM [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 2")
-				EMAIL_CUERPO = EMAIL_CUERPO.Replace("[EMAIL_ENCABEZADO]", EMAIL_ENCABEZADO)
-				Dim Band As String = RENVIO_ENVIA_MAIL(EMAIL_CUERPO, EMAIL_DESTINATARIO, EMAIL_ENCABEZADO, archivopdf, archivoxml)
-				Return Band
-			Catch ex As Exception
-				Return ex.Message & "ERROR EN RENVIO_ENVIAR_CORREO"
-			End Try
-		End Function
+            Try
+                Dim EMAIL_CUERPO As String = ""
+                EMAIL_CUERPO = Mdl_Facturacion.RECUPERA_VALOR_STRING("SELECT AFE_HTML_BODY FROM [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[APD_16_FUNCIONALIDAD_ESTRUCTURAS] WHERE AFE_CLAVE = 2")
+                EMAIL_CUERPO = EMAIL_CUERPO.Replace("[EMAIL_ENCABEZADO]", EMAIL_ENCABEZADO)
+                Dim Band As String = RENVIO_ENVIA_MAIL(EMAIL_CUERPO, EMAIL_DESTINATARIO, EMAIL_ENCABEZADO, archivopdf, archivoxml)
+                Return Band
+            Catch ex As Exception
+                Return ex.Message & "ERROR EN RENVIO_ENVIAR_CORREO"
+            End Try
+        End Function
         '/*USADO PARA NUEVA FACTURACION*/
         Public Function RENVIO_ENVIA_MAIL(ByVal EMAIL_CUERPO As String, ByVal EMAIL_DESTINATARIO As String, ByVal EMAIL_ENCABEZADO As String, ByVal archivopdf As String, ByVal archivoxml As String) As String
             Try
@@ -3355,10 +3352,10 @@ Namespace Controllers
         Public Function ENVIA_MAIL_RFC(ByVal EMAIL_CUERPO As String, ByVal RFC As String, ByVal EMAIL_DESTINATARIO As String) As Boolean
             Try
                 Dim fromaddr As String = "lerdofacturacion@gmail.com"
-				Dim toaddr As String = EMAIL_DESTINATARIO
-				Dim password As String = "jsvyumtxkhhtzycm"
+                Dim toaddr As String = EMAIL_DESTINATARIO
+                Dim password As String = "jsvyumtxkhhtzycm"
 
-				Dim msg As New System.Net.Mail.MailMessage
+                Dim msg As New System.Net.Mail.MailMessage
                 msg.Subject = "VALIDACIÓN DE LA INFORMACIÓN CORRESPONDIENTE AL RFC " + RFC
                 msg.From = New System.Net.Mail.MailAddress(fromaddr)
                 msg.Body = EMAIL_CUERPO
@@ -3643,16 +3640,19 @@ Namespace Controllers
             Return cadena
         End Function
 
+
+        '/* NUEVA FACTURACION */
         <HttpGet>
         <Route("api/Facturacion/RecuperaEstados")>
         Public Function RecuperaEstados()
             Dim SentSQL As String
             Dim resultado As ArrayList
-			SentSQL = "SELECT CPA_CLAVE,CES_CLAVE,CES_NOMBRE FROM [APDSGEDB_PL].[DBO].CAT_02_ESTADOS"
-			resultado = Mdl_Facturacion.REGRESA_ARRAY(SentSQL)
+            SentSQL = "SELECT CPA_CLAVE,CES_CLAVE,CES_NOMBRE FROM [APDSGEDB_PL].[DBO].CAT_02_ESTADOS"
+            resultado = Mdl_Facturacion.REGRESA_ARRAY(SentSQL)
 
             Return resultado
         End Function
+        '/* NUEVA FACTURACION*/
         <HttpGet>
         <Route("api/Facturacion/RecuperaMunicipios")>
         Public Function RecuperaMunicipios()
@@ -3672,7 +3672,7 @@ Namespace Controllers
             Dim SentSQL As String
             Dim resultado As String = ""
             Dim random As New System.Random()
-            Dim Codigo As String = Random.Next(1000, 10000).ToString()
+            Dim Codigo As String = random.Next(1000, 10000).ToString()
             Try
                 'https://www.waboxapp.com/api/send/chat?token=d8d12c3380f80c46f969637ede039d786622d09aaa46a&uid=5218713913346&to=521[TELEFONO_DESTINO]&custom_uid=PL-[CODIGO]-[TIEMPO]&text=[MENSAJE]
                 SentSQL = "SELECT AFE_HTML_BODY FROM [SRV_VIALIDAD].[APDSGEDB_PL].[DBO].APD_16_FUNCIONALIDAD_ESTRUCTURAS WHERE AFE_CLAVE = 3"
@@ -3685,7 +3685,6 @@ Namespace Controllers
                     resultado = resultado.Replace("[TIEMPO]", Now().ToString("ddMMyyyyHHmmss"))
                     resultado = resultado.Replace("[TELEFONO_DESTINO]", tel.ToString())
                     resultado = resultado.Replace("[MENSAJE]", mensaje)
-
                     Dim oRequest As WebRequest = WebRequest.Create(resultado)
                     Dim oResponse As WebResponse = oRequest.GetResponse()
                     Dim sr As StreamReader = New StreamReader(oResponse.GetResponseStream())
@@ -3700,6 +3699,8 @@ Namespace Controllers
             End Try
         End Function
 
+        '/*     NUEVA FACTURACION 
+        '       PRUEAB DE ENVIO DE WHATSAPP DESDE API INTERNA*/
         Public Function Envia_Whatsapp_ERROR_FACTURACION(NOMBRE_FISCAL As String, TELEFONO_CLIENTE As String, RFC_CLIENTE As String, CODE_ERROR As String, DESCIRPCION_ERROR As String, SOLUCION As String) As String
             Dim SentSQL As String
             Dim resultado As String = ""

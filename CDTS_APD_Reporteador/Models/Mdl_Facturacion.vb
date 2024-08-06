@@ -333,7 +333,7 @@ Namespace Models
 
                 Using conn As New SqlConnection(ConnString)
                     Try
-                        Dim cmd As New SqlCommand("SELECT   VTA_03_CLIENTES.VCL_CLAVE AS NUMEROCLIENTE, 
+                        Dim cmd As New SqlCommand(" SELECT  VTA_03_CLIENTES.VCL_CLAVE AS NUMEROCLIENTE, 
                                                             VTA_03_CLIENTES.VCL_NOMBRE AS NOMBRE, 
                                                             VTA_03_CLIENTES.VCL_DIRECCION + ' ' + VTA_03_CLIENTES.VCL_COLONIA AS DIRECCION, 
                                                             CAT_03_MUNICIPIOS.CMP_NOMBRE AS CIUDAD, 
