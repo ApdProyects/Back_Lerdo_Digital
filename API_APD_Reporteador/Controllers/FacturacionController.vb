@@ -837,7 +837,7 @@ Namespace Controllers
 	  <div class='container'>
 		  <div class='row'>
 			  <div class='col-md-3'>
-				  <img src='https://apir.grupoapd.mx/img/lerdologo.jpeg' alt='Lerdo de oportunidades' style='width: 100%; height:130px;'>
+				  <img src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' alt='Lerdo de oportunidades' style='width: 100%; height:130px;'>
 			  </div>
 			  <div class='col-md-6' style='padding-top:16px;'>
 					<div class='row'>
@@ -864,7 +864,7 @@ Namespace Controllers
 					</div>
 			  </div>
 			  <div class='col-md-3'>
-				  <img src='https://apir.grupoapd.mx/img/apdlogo.png' alt='APD Consultores en tecnología' style='width: 100%; height: 130px;'>
+				  <img src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' alt='APD Consultores en tecnología' style='width: 100%; height: 130px;'>
 			  </div>
 		  </div>
 		  <div class='row'>
@@ -1517,7 +1517,7 @@ Namespace Controllers
                 '================================================================================================ FIN TIMBRADO XML ================================================================================================
 
                 '======================================================================================== ACTUALIZA FOLIO FACTURACION =============================================================================================
-                Dim SentSQL As String = "UPDATE [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[CAT_14_EMPRESAS] SET CEP_FE_NUM_FACTURA = " & FE_NumFacturita & ""
+                Dim SentSQL As String = "UPDATE [SRV_VIALIDAD].[APDSGEDB_PL].[dbo].[CAT_14_EMPRESAS] SET CEP_FE_NUM_FACTURA = CEP_FE_NUM_FACTURA + 1 " & FE_NumFacturita & ""
                 Mdl_Facturacion.ACTUALIZAR_CEP_FE_NUM_FACTURA(SentSQL)
                 '==================================================================================== FIN ACTUALIZA FOLIO FACTURACION =============================================================================================
                 Dim Diita = CStr(Format(DatePart(DateInterval.Day, Now), 0))
@@ -1723,11 +1723,9 @@ Namespace Controllers
 
                 Dim htmlString As String = CUERPO_PDF
                 Dim pdf_page_size As String = "A4"
-                Dim pageSize As PdfPageSize = DirectCast([Enum].Parse(GetType(PdfPageSize),
-                pdf_page_size, True), PdfPageSize)
+                Dim pageSize As PdfPageSize = DirectCast([Enum].Parse(GetType(PdfPageSize), pdf_page_size, True), PdfPageSize)
                 Dim pdf_orientation As String = "Portrait"
-                Dim pdfOrientation As PdfPageOrientation = DirectCast(
-                [Enum].Parse(GetType(PdfPageOrientation),
+                Dim pdfOrientation As PdfPageOrientation = DirectCast([Enum].Parse(GetType(PdfPageOrientation),
                 pdf_orientation, True), PdfPageOrientation)
                 Dim webPageWidth As Integer = 1024
                 Try
@@ -1751,7 +1749,12 @@ Namespace Controllers
                 Dim sql As String = "SELECT LUS_CORREO FROM [SRV_VIALIDAD].[APDSGEDB_PL].[DBO].LDG_04_USUARIOS WHERE LUS_CLAVE = " & Usuario.ToString()
                 Dim Correo As String = Mdl_Facturacion.RECUPERA_VALOR_STRING(sql)
 
-                Dim bool As String = ENVIAR_CORREO("", VentaDiaria.ToString(), Correo, "", "", "", "", HttpContext.Current.Request.PhysicalApplicationPath + "XML\" & "\APD_" & String.Format("{0:000000}", Convert.ToInt32(FE_NumFacturita)) & "_" & CStr(RFC) & ".pdf", HttpContext.Current.Request.PhysicalApplicationPath + "XML\" & "\APD_" & String.Format("{0:000000}", Convert.ToInt32(FE_NumFacturita)) & "_" & CStr(RFC) & ".xml")
+                Dim bool As String = ENVIAR_CORREO("",
+                                                   VentaDiaria.ToString(),
+                                                   Correo,
+                                                   "", "", "", "",
+                                                   HttpContext.Current.Request.PhysicalApplicationPath + "XML\" & "\APD_" & String.Format("{0:000000}", Convert.ToInt32(FE_NumFacturita)) & "_" & CStr(RFC) & ".pdf",
+                                                   HttpContext.Current.Request.PhysicalApplicationPath + "XML\" & "\APD_" & String.Format("{0:000000}", Convert.ToInt32(FE_NumFacturita)) & "_" & CStr(RFC) & ".xml")
 
                 Cs_Respuesta.codigo = 1
                 Cs_Respuesta.codigoError = 200

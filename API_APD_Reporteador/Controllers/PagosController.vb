@@ -16,6 +16,8 @@ Imports Image = System.Drawing.Image
 Imports ZXing
 Imports ZXing.QrCode
 Imports ZXing.Common
+Imports System.Data.SqlTypes
+Imports System.Web.Services.Description
 
 Namespace Controllers
     Public Class PagosController
@@ -44,11 +46,12 @@ Namespace Controllers
                 Return "data:image/png;base64," + imageString
             End Using
         End Function
+
         <HttpGet>
         <Route("api/Pagos/genera_recibo")>
         Public Function genera_recibo(ByVal id_folio As String, ByVal id_concepto As Integer, ByVal id_depto As Integer, ByVal usuario As String,
                                       ByVal RESULTADO_PAYW As String, ByVal ID_AFILIACION As String, ByVal FECHA_RSP_CTE As DateTime, ByVal CODIGO_AUT As String,
-                                      ByVal REFERENCIA As String, ByVal FECHA_REQ_CTE As DateTime, ByVal Set_Cookie As String, ByVal pago As Double, ByVal correo As String) As Cs_Respuesta_pago
+                                      ByVal REFERENCIA As String, ByVal FECHA_REQ_CTE As DateTime, ByVal Set_Cookie As String, ByVal pago As String, ByVal correo As String) As Cs_Respuesta_pago
             Dim Cs_Pago As New Cs_Pago
             Dim Cs_Respuesta_pago As New Cs_Respuesta_pago
             Dim Cs_InfoFolio As New ArrayList
@@ -168,7 +171,7 @@ Namespace Controllers
                                         <div class='container-fluid'>
                                             <div class='row'>
                                                 <div class='col-3 text-center' style='padding-top:30px;'>
-                                                    <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+                                                    <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
                                                 </div>
                                                 <div class='col-6 text-center' style='padding-top:50px;'>
                                                     <font face='Arial' style='font-size: 22px;'><b>PRESIDENCIA MUNICIPAL LERDO DURANGO</b></font><br> 
@@ -180,7 +183,7 @@ Namespace Controllers
                                                                                    P&nbsp;&nbsp;A&nbsp;&nbsp;G&nbsp;&nbsp;O</b></font><br><br>
                                                 </div>
                                                 <div class='col-3 text-center' style='padding-top:50px;'>
-                                                    <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+                                                    <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
                                                    
                                                 </div>
                                             </div>
@@ -209,10 +212,10 @@ Namespace Controllers
                                             <br>
                                             <div class='row'>
                                                 <div class='col-2' style='padding-left: 50px; padding-top: 38px;'>
-                                                    <img alt='SAT' src='https://apir.grupoapd.mx/img/sat.jpg' width='120px'>
+                                                    <img alt='SAT' src='C:\inetpub\API_LERDO_DIGITAL\img\sat.jpg' width='120px'>
                                                 </div>
                                                 <div class='col-9' style='padding-left: 5px;'>
-                                                    <table class='table' style='border: 1px solid white;' background='https://apir.grupoapd.mx/img/lerdologoMA.jpeg'> 
+                                                    <table class='table' style='border: 1px solid white;' background='C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg'> 
                                                         <tbody>
                                                           <tr style='border: 2px solid black;'>
                                                             <td style='font-size: 13px; border-right: 2px solid black;'><b>CONCEPTO</b></td>
@@ -268,7 +271,7 @@ Namespace Controllers
                                                 </div> 
                                                 <div class='col-9' style='padding-left: 50px; padding-bottom: 10px;'>
                                                     <div style='border: 2px solid black; width: 100%; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'>
-                                                       <font face='Arial' style='font-size: 14px;'>" & numero2letras.ToString() & " M.N.</font> 
+                                                       <font face='Arial' style='font-size: 14px;'>" & numero2letras.ToString() & " </font> 
                                                     </div>
                                                     <font face='Arial' style='font-size: 14px;'><b>PUEDES GENERAR FACTURA EN www.lerdodigital.mx con el Folio " & Cs_Respuesta_pago.folio & "</b></font>  
                                                 </div>
@@ -380,7 +383,7 @@ Namespace Controllers
         <Route("api/Pagos/recibo_pago")>
         Public Function recibo_pago(ByVal id_folio As String, ByVal id_concepto As Integer, ByVal id_depto As Integer, ByVal usuario As String,
                                       ByVal RESULTADO_PAYW As String, ByVal ID_AFILIACION As String, ByVal FECHA_RSP_CTE As DateTime, ByVal CODIGO_AUT As String,
-                                      ByVal REFERENCIA As String, ByVal FECHA_REQ_CTE As DateTime, ByVal Set_Cookie As String, ByVal pago As Double, ByVal correo As String) As Cs_Respuesta_pago
+                                      ByVal REFERENCIA As String, ByVal FECHA_REQ_CTE As DateTime, ByVal Set_Cookie As String, ByVal pago As String, ByVal correo As String) As Cs_Respuesta_pago
             Dim Cs_Pago As New Cs_Pago
             Dim Cs_Respuesta_pago As New Cs_Respuesta_pago
             Dim Cs_InfoFolio As New ArrayList
@@ -458,7 +461,7 @@ Namespace Controllers
                                         <div class='container-fluid'>
                                             <div class='row'>
                                                 <div class='col-3 text-center' style='padding-top:30px;'>
-                                                    <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+                                                    <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
                                                 </div>
                                                 <div class='col-6 text-center' style='padding-top:50px;'>
                                                     <font face='Arial' style='font-size: 22px;'><b>PRESIDENCIA MUNICIPAL LERDO DURANGO</b></font><br> 
@@ -470,7 +473,7 @@ Namespace Controllers
                                                                                    P&nbsp;&nbsp;A&nbsp;&nbsp;G&nbsp;&nbsp;O</b></font><br><br>
                                                 </div>
                                                 <div class='col-3 text-center' style='padding-top:50px;'>
-                                                    <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+                                                    <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
                                                     <font face='Arial' size='4'><b>N°</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Arial' color='red' size='4'><b>607" + String.Format("{0:000000}", FolioRecibo) + "</b></font>  
                                                 </div>
                                             </div>
@@ -499,10 +502,10 @@ Namespace Controllers
                                             <br>
                                             <div class='row'>
                                                 <div class='col-2' style='padding-left: 50px; padding-top: 38px;'>
-                                                    <img alt='SAT' src='https://apir.grupoapd.mx/img/sat.jpg' width='120px'>
+                                                    <img alt='SAT' src='C:\inetpub\API_LERDO_DIGITAL\img\sat.jpg' width='120px'>
                                                 </div>
                                                 <div class='col-9' style='padding-left: 5px;'>
-                                                    <table class='table' style='border: 1px solid white;' background='https://apir.grupoapd.mx/img/lerdo_logo_desva.png'> 
+                                                    <table class='table' style='border: 1px solid white;' background='C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg'> 
                                                         <tbody>
                                                           <tr style='border: 2px solid black;'>
                                                             <td style='font-size: 13px; border-right: 2px solid black;'><b>CONCEPTO</b></td>
@@ -613,11 +616,14 @@ Namespace Controllers
 
             Return Cs_Respuesta_pago
         End Function
+
+        ''RUTA NUEVA PARA GENERAR ODP DE LERDO DIGITAL
         <HttpGet>
         <Route("api/Pagos/RealizarPagos")>
         Public Function RealizarPagos(ByVal id_folio As String, ByVal id_concepto As Integer, ByVal id_depto As Integer, ByVal usuario As String,
                                       ByVal RESULTADO_PAYW As String, ByVal ID_AFILIACION As String, ByVal FECHA_RSP_CTE As DateTime, ByVal CODIGO_AUT As String,
-                                      ByVal REFERENCIA As String, ByVal FECHA_REQ_CTE As DateTime, ByVal Set_Cookie As String, ByVal pago As Double, ByVal correo As String) As Cs_Respuesta_pago
+                                      ByVal REFERENCIA As String, ByVal FECHA_REQ_CTE As DateTime, ByVal Set_Cookie As String, ByVal pago As String, ByVal correo As String) As Cs_Respuesta_pago
+            Dim culture As New CultureInfo("en-US")
             Dim Cs_Pago As New Cs_Pago
             Dim Cs_Respuesta_pago As New Cs_Respuesta_pago
             Dim Cs_InfoFolio As New ArrayList
@@ -628,6 +634,7 @@ Namespace Controllers
             Dim folio_replica = id_folio
             Dim sqlString = ""
             Dim FOLO_CATASTRO As String = ""
+            Dim ES_MULTA As String = ""
             Cs_Pago.id_folio = id_folio
             Cs_Pago.id_concepto = id_concepto
             Cs_Pago.id_depto = id_depto
@@ -639,7 +646,7 @@ Namespace Controllers
             Cs_Pago.REFERENCIA = REFERENCIA
             Cs_Pago.FECHA_REQ_CTE = FECHA_REQ_CTE
             Cs_Pago.Set_Cookie = Set_Cookie
-            Cs_Pago.pago = pago
+            Cs_Pago.pago = pago '.ToString("F2", culture)
 
 
 
@@ -667,9 +674,9 @@ Namespace Controllers
                     Concepto = Mdl_InfoFolio.Recupera_Conceptos(Cs_Pago.id_folio, Cs_Pago.id_depto, Cs_Pago.id_concepto)
                     For Each i In Concepto
                         conceptos += i.ICO_NOMBRE & "  " & Cs_Pago.id_folio.ToString() & "<br><br>"
-                        subtotales += FormatCurrency(Convert.ToDouble(i.IIN_SUBTOTAL).ToString()) & "<br><br>"
-                        descuentos += FormatCurrency(Convert.ToDouble(i.IIN_DESCUENTO_IMPORTE).ToString()) & "<br><br>"
-                        totales += FormatCurrency(Convert.ToDouble(i.IIN_TOTAL).ToString()) & "<br><br>"
+                        subtotales += "$" & (Convert.ToDouble(i.IIN_SUBTOTAL)).ToString("F2", culture) & "<br><br>"
+                        descuentos += "$" & (Convert.ToDouble(i.IIN_DESCUENTO_IMPORTE)).ToString("F2", culture) & "<br><br>"
+                        totales += "$" & (Convert.ToDouble(i.IIN_TOTAL)).ToString("F2", culture) & "<br><br>"
                     Next
                     Dim IIN_CLAVE As String = Cs_Respuesta_pago.folio ' 27257
 
@@ -679,7 +686,7 @@ Namespace Controllers
 
                     Dim cabecero = Cs_Respuesta_pago.Cs_InfoFolio
                     Dim cuantos = Cs_InfoFolio.Count
-                    Dim numero2letras = UCase(letras(pago))
+                    Dim numero2letras = UCase(letras(Cs_Pago.pago))
                     Dim html = ""
 
                     Dim FolioRecibo As Integer = 0
@@ -699,8 +706,10 @@ Namespace Controllers
                         ''  descuentos = FormatCurrency((Convert.ToDouble(Cs_InfoFolio(0)(3)) - Convert.ToDouble(Cs_InfoFolio(0)(5)))).ToString() & "<br><br>"
                         TextoDescuento = "Subsidio por Incentivo"
                     End If
-
-                    html = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:v='urn:schemas-microsoft-com:vml'>
+                    sqlString = "EXEC PA_WEB_VERIFICAR_MUTLA_RETORNA_FORMATO_PAGO '" + id_folio + "'"
+                    ES_MULTA = Mdl_Pagos.RECUPERA_VALOR_STRING(sqlString)
+                    If (ES_MULTA = "-1") Then
+                        html = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:v='urn:schemas-microsoft-com:vml'>
                                     <head>
                                         <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
                                         <meta content='width=device-width' name='viewport'>
@@ -710,7 +719,7 @@ Namespace Controllers
                                     
                                         <style>
                                             .tabla-con-fondo {
-                                               background-image: url('https://apir.grupoapd.mx/img/lerdologoMA.jpeg');
+                                               background-image: url('C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg');
                                                background-size: 50%; /* Ajusta el tamaño de la imagen para cubrir el fondo */
                                                background-position: left; /* Centra la imagen en el fondo */
                                                background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -726,7 +735,7 @@ Namespace Controllers
                                         <div class='container-fluid'>
                                             <div class='row'>
                                                 <div class='col-3 text-center' style='padding-top:30px;'>
-                                                    <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+                                                    <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
                                                 </div>
                                                 <div class='col-6 text-center' style='padding-top:50px;'>
                                                     <font face='Arial' style='font-size: 22px;'><b>PRESIDENCIA MUNICIPAL LERDO DURANGO</b></font><br> 
@@ -738,7 +747,7 @@ Namespace Controllers
                                                                                    P&nbsp;&nbsp;A&nbsp;&nbsp;G&nbsp;&nbsp;O</b></font><br><br>
                                                 </div>
                                                 <div class='col-3 text-center' style='padding-top:50px;'>
-                                                    <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+                                                    <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
                                                     <font face='Arial' size='4'><b>N°</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Arial' color='red' size='4'><b>818" + String.Format("{0:000000}", FolioRecibo) + "</b></font>  
                                                 </div>
                                             </div>
@@ -767,7 +776,7 @@ Namespace Controllers
                                             <br>
                                             <div class='row'>
                                                 <div class='col-2' style='padding-left: 50px; padding-top: 38px;'>
-                                                    <img alt='SAT' src='https://apir.grupoapd.mx/img/sat.jpg' width='120px'>
+                                                    <img alt='SAT' src='C:\inetpub\API_LERDO_DIGITAL\img\sat.jpg' width='120px'>
                                                     <br><br>
                                                     <img src='" + QR + "' class='rounded float-start' alt='QR' width='90px'height='90px'>
                                                 </div>
@@ -791,14 +800,14 @@ Namespace Controllers
                                                             <td style='font-size: 12px; border-right: 2px solid black;'>" + TextoDescuento + "<br><br></td>
                                                             <td style='font-size: 12px; text-align: right; border-right: 2px solid black;'></td>
                                                             <td style='font-size: 12px; text-align: right; border-right: 2px solid black; padding-top:35px;'>Total:</td>
-                                                            <td style='font-size: 12px; text-align: right; padding-top:35px;'>" & (FormatCurrency(Convert.ToDouble(pago))).ToString() & "</td>
+                                                            <td style='font-size: 12px; text-align: right; padding-top:35px;'> $" & pago.ToString() & "</td>
                                                           </tr>
                                                           <tr> 
                                                           <tr style='border: 2px solid black;'>
-                                                            <td style='font-size: 12px; padding-top: 15px;'>( TC " & (FormatCurrency(Convert.ToDouble(pago))).ToString() & " )</td>
+                                                            <td style='font-size: 12px; padding-top: 15px;'>( TC $" & pago.ToString() & " )</td>
                                                             <td style='font-size: 12px; text-align: right; padding-top: 15px;'></td>
                                                             <td style='font-size: 12px; text-align: right; padding-top: 10px;'>Pago Con:</td>
-                                                          <td style='font-size: 12px; text-align: right; padding-top: 10px;'>" & (FormatCurrency(Convert.ToDouble(pago))).ToString() & "</td>
+                                                          <td style='font-size: 12px; text-align: right; padding-top: 10px;'> $" & pago.ToString() & "</td>
                                                           </tr> 
                                                           </tr>
                                                         </tbody>
@@ -846,7 +855,14 @@ Namespace Controllers
                             </div>
                         </body>
                         </html>"
-
+                    Else
+                        html = ES_MULTA
+                        html = html.Replace("[FECHA]", Format(Now, "dd/MM/yyyy hh:mm tt"))
+                        html = html.Replace("[FOLIORECIBO]", String.Format("{0:000000}", FolioRecibo))
+                        html = html.Replace("[CODEQR]", QR)
+                        html = html.Replace("[NUMERO_CON_LETRA]", numero2letras.ToString())
+                        html = html.Replace("[CODE_BARRAS]", "data:image/jpg;base64, " + CodigoBarras.ToString())
+                    End If
 
 
                     Dim htmlString As String = html
@@ -935,35 +951,50 @@ Namespace Controllers
 
                     If Not IsNothing(detalle(34)) AndAlso detalle(34) > 0 Then
                         conceptos += "IMPUESTO DEL EJERCICIO 2024 PREDIAL<br><br>"
-                        subtotales += FormatCurrency(Convert.ToDouble(detalle(34)).ToString()) & "<br><br>"
-                        'totales += FormatCurrency(Convert.ToDouble(detalle(34)).ToString()) & "<br><br>"
-                        totales += FormatCurrency(Convert.ToDouble(detalle(34)) - Convert.ToDouble(detalle(60)).ToString()) & "<br><br>"
+                        'subtotales += FormatCurrency(Convert.ToDouble(detalle(34)).ToString()) & "<br><br>"
+                        ''totales += FormatCurrency(Convert.ToDouble(detalle(34)).ToString()) & "<br><br>"
+                        'totales += FormatCurrency(Convert.ToDouble(detalle(34)) - Convert.ToDouble(detalle(60)).ToString()) & "<br><br>"
+
+                        ''subtotales += "$" & (Convert.ToDouble(i.IIN_SUBTOTAL)).ToString("F2", culture) & "<br><br>"
+                        subtotales += "$" & (Convert.ToDouble(detalle(34))).ToString("F2", culture) & "<br><br>"
+                        totales += (Convert.ToDouble(detalle(34)) - Convert.ToDouble(detalle(60))).ToString("F2", culture) & "<br><br>"
 
                     End If
                     If Not IsNothing(detalle(35)) AndAlso detalle(35) > 0 Then
                         conceptos += "REZAGOS DE EJERCICIOS ANTERIORES<br><br>"
-                        subtotales += FormatCurrency(Convert.ToDouble(detalle(35)).ToString()) & "<br><br>"
-                        totales += FormatCurrency(Convert.ToDouble(detalle(35)).ToString()) & "<br><br>"
+                        'subtotales += FormatCurrency(Convert.ToDouble(detalle(35)).ToString()) & "<br><br>"
+                        'totales += FormatCurrency(Convert.ToDouble(detalle(35)).ToString()) & "<br><br>"
+                        subtotales += "$" & (Convert.ToDouble(detalle(35))).ToString("F2", culture) & "<br><br>"
+                        totales += "$" & (Convert.ToDouble(detalle(35))).ToString("F2", culture) & "<br><br>"
+
                     End If
                     If Not IsNothing(detalle(41)) AndAlso detalle(41) > 0 Then
                         conceptos += "GASTOS DE EJECUCION PREDIAL<br><br>"
-                        subtotales += FormatCurrency(Convert.ToDouble(detalle(41)).ToString()) & "<br><br>"
-                        totales += FormatCurrency(Convert.ToDouble(detalle(41)).ToString()) & "<br><br>"
+                        'subtotales += FormatCurrency(Convert.ToDouble(detalle(41)).ToString()) & "<br><br>"
+                        'totales += FormatCurrency(Convert.ToDouble(detalle(41)).ToString()) & "<br><br>"
+                        subtotales += "$" & (Convert.ToDouble(detalle(41))).ToString("F2", culture) & "<br><br>"
+                        totales += "$" & (Convert.ToDouble(detalle(41))).ToString("F2", culture) & "<br><br>"
                     End If
                     If Not IsNothing(detalle(42)) AndAlso detalle(42) > 0 Then
                         conceptos += "MULTAS PREDIAL<br><br>"
-                        subtotales += FormatCurrency(Convert.ToDouble(detalle(42)).ToString()) & "<br><br>"
-                        totales += FormatCurrency(Convert.ToDouble(detalle(42)).ToString()) & "<br><br>"
+                        'subtotales += FormatCurrency(Convert.ToDouble(detalle(42)).ToString()) & "<br><br>"
+                        'totales += FormatCurrency(Convert.ToDouble(detalle(42)).ToString()) & "<br><br>"
+                        subtotales += "$" & (Convert.ToDouble(detalle(42))).ToString("F2", culture) & "<br><br>"
+                        totales += "$" & (Convert.ToDouble(detalle(42))).ToString("F2", culture) & "<br><br>"
                     End If
                     If Not IsNothing(detalle(43)) AndAlso detalle(43) > 0 Then
                         conceptos += "RECARGOS DE EJERCICIOS ANTERIORES<br><br>"
-                        subtotales += FormatCurrency(Convert.ToDouble(detalle(43)).ToString()) & "<br><br>"
-                        totales += FormatCurrency(Convert.ToDouble(detalle(43)).ToString()) & "<br><br>"
+                        'subtotales += FormatCurrency(Convert.ToDouble(detalle(43)).ToString()) & "<br><br>"
+                        'totales += FormatCurrency(Convert.ToDouble(detalle(43)).ToString()) & "<br><br>"
+                        subtotales += "$" & (Convert.ToDouble(detalle(43))).ToString("F2", culture) & "<br><br>"
+                        totales += "$" & (Convert.ToDouble(detalle(43))).ToString("F2", culture) & "<br><br>"
                     End If
                     If Not IsNothing(detalle(44)) AndAlso detalle(44) > 0 Then
                         conceptos += "DIFERENCIAS<br><br>"
-                        subtotales += FormatCurrency(Convert.ToDouble(detalle(44)).ToString()) & "<br><br>"
-                        totales += FormatCurrency(Convert.ToDouble(detalle(44)).ToString()) & "<br><br>"
+                        'subtotales += FormatCurrency(Convert.ToDouble(detalle(44)).ToString()) & "<br><br>"
+                        'totales += FormatCurrency(Convert.ToDouble(detalle(44)).ToString()) & "<br><br>"
+                        subtotales += "$" & (Convert.ToDouble(detalle(44))).ToString("F2", culture) & "<br><br>"
+                        totales += "$" & (Convert.ToDouble(detalle(44))).ToString("F2", culture) & "<br><br>"
                     End If
                     'If Not IsNothing(detalle(63)) AndAlso detalle(63) > 0 Then
                     '    conceptos += "ACTUALIZACION<br><br>"
@@ -971,7 +1002,9 @@ Namespace Controllers
                     '    totales += FormatCurrency(Convert.ToDouble(detalle(63)).ToString()) & "<br><br>"
                     'End If
                     If Not IsNothing(detalle(60)) AndAlso detalle(60) > 0 Then
-                        descuentos = FormatCurrency(Convert.ToDouble(detalle(60)).ToString()) & "<br>"
+                        'descuentos = FormatCurrency(Convert.ToDouble(detalle(60)).ToString()) & "<br>"
+                        descuentos = "$" & (Convert.ToDouble(detalle(60))).ToString("F2", culture) & "<br><br>"
+
                     End If
 
                     Dim year = Format(detalle(4), "yyyy")
@@ -998,7 +1031,7 @@ Namespace Controllers
                                     
                                            <style>
                                            .tabla-con-fondo {
-                                              background-image: url('https://apir.grupoapd.mx/img/lerdologoMA.jpeg');
+                                              background-image: url('C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg');
                                               background-size: 50%; /* Ajusta el tamaño de la imagen para cubrir el fondo */
                                               background-position: left; /* Centra la imagen en el fondo */
                                               background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -1016,7 +1049,7 @@ Namespace Controllers
                                         <div class='container-fluid'>
                                             <div class='row'>
                                                 <div class='col-3 text-center' style='padding-top:30px;'>
-                                                    <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+                                                    <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
                                                 </div>
                                                 <div class='col-6 text-center' style='padding-top:50px;'>
                                                     <font face='Arial' style='font-size: 22px;'><b>PRESIDENCIA MUNICIPAL LERDO DURANGO</b></font><br> 
@@ -1028,7 +1061,7 @@ Namespace Controllers
                                                                                    P&nbsp;&nbsp;A&nbsp;&nbsp;G&nbsp;&nbsp;O</b></font><br><br>
                                                 </div>
                                                 <div class='col-3 text-center' style='padding-top:50px;'>
-                                                    <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+                                                    <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
                                                     <font face='Arial' size='4'><b>N°</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Arial' color='red' size='4'><b>818" + String.Format("{0:000000}", FolioRecibo) + "</b></font>  
 
                                                 </div>
@@ -1042,7 +1075,7 @@ Namespace Controllers
                                                 <div class='col-8' style='padding-left: 55px; padding-top: 3px;'>
                                                     <font face='Arial' size='2'>" & detalle(7) & "</font><br>  
                                                     <font face='Arial' size='2'>" & detalle(8) & "</font><br>
-                                                    <font face='Arial' size='2'><b>VALOR CATASTRAL " & (FormatCurrency(Convert.ToDouble(detalle(31)))).ToString() & "</b></font>
+                                                    <font face='Arial' size='2'><b>VALOR CATASTRAL $ " & (Convert.ToDouble(detalle(31))).ToString("F2", culture) & "</b></font>
                                                 </div>
                                                 <div class='col-1' style='padding-top: 3px;'>
                                                     <font face='Arial' size='2'>FECHA:</font><br>  
@@ -1058,7 +1091,7 @@ Namespace Controllers
                                             <br>
                                             <div class='row'>
                                                 <div class='col-2' style='padding-left: 50px; padding-top: 38px;'>
-                                                    <img alt='SAT' src='https://apir.grupoapd.mx/img/sat.jpg' width='120px'>
+                                                    <img alt='SAT' src='C:\inetpub\API_LERDO_DIGITAL\img\sat.jpg' width='120px'>
                                                     <br><br>
                                                     <img src='" + QR + "' class='rounded float-start' alt='QR' width='90px'height='90px'>
                                                 </div>
@@ -1087,14 +1120,14 @@ Namespace Controllers
                                                                                                                         " + (Convert.ToInt32(year) - 5).ToString() + "</td>
                                                             <td style='font-size: 12px; text-align: right; border-right: 2px solid black;'></td>
                                                             <td style='font-size: 12px; text-align: right; border-right: 2px solid black; padding-top:35px;'>Total:</td>
-                                                            <td style='font-size: 12px; text-align: right; padding-top:35px;'>" & (FormatCurrency(Convert.ToDouble(pago))).ToString() & "</td>
+                                                            <td style='font-size: 12px; text-align: right; padding-top:35px;'> $ " & pago.ToString() & "</td>
                                                           </tr>
                                                           <tr> 
                                                           <tr style='border: 2px solid black;'>
-                                                            <td style='font-size: 12px; padding-top: 15px;'>( TC " & (FormatCurrency(Convert.ToDouble(pago))).ToString() & " )</td>
+                                                            <td style='font-size: 12px; padding-top: 15px;'>( TC $ " & pago.ToString() & " )</td>
                                                             <td style='font-size: 12px; text-align: right; padding-top: 15px;'></td>
                                                             <td style='font-size: 12px; text-align: right; padding-top: 10px;'>Pago Con:</td>
-                                                            <td style='font-size: 12px; text-align: right; padding-top: 10px;'>" & (FormatCurrency(Convert.ToDouble(pago))).ToString() & "</td>
+                                                            <td style='font-size: 12px; text-align: right; padding-top: 10px;'> $ " & pago.ToString() & "</td>
                                                           </tr> 
                                                           </tr>
                                                         </tbody>
@@ -1215,6 +1248,7 @@ Namespace Controllers
         <HttpPost>
         <Route("api/Pagos/ODP_Corralon")>
         Public Function ODP_Corralon(<FromBody()> ByVal data As Object)
+            Dim culture As New CultureInfo("en-US")
             Dim Cs_Pago As New Cs_Pago
             Dim Cs_Respuesta_pago As New Cs_Respuesta_pago
             Dim QR As String
@@ -1281,13 +1315,13 @@ Namespace Controllers
                                                     <div class='container-fluid'>
                                                         <div class='row'>
                                                             <div class='col-3 text-center' style='padding-top:30px;'>
-                                                                <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+                                                                <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
                                                             </div>
                                                             <div class='col-6 text-center' style='padding-top:50px;'>
                                                                 <font face='Arial' style='font-size: 25px;'><b>ORDEN DE PAGO CORRALON</b></font><br> 
                                                             </div>
                                                             <div class='col-3 text-center' style='padding-top:50px;'>
-                                                                <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+                                                                <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
                   
                                                             </div>
                                                         </div>
@@ -1323,7 +1357,7 @@ Namespace Controllers
                                                             <div class='col-11' style='padding-left: 51px;'>
                    
                                                                     <table class='table' style='border: 1px solid black;'>
-                                                                <!--<table class='table' style='border: 1px solid white; background: url(https://apir.grupoapd.mx/img/lerdo_logo_desva.png) no-repeat;'>--> 
+                                                                <!--<table class='table' style='border: 1px solid white; background: url(C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg) no-repeat;'>--> 
                                                                     <tbody>
                                                                       <tr style='border: 2px solid black;'>
                                                                         <td style='font-size: 14px; border-right: 2px solid black;text-align: center;'><b>CANTIDAD</b></td>
@@ -1334,15 +1368,15 @@ Namespace Controllers
                                                                       <tr style='border-left: 2px solid black; border-right: 2px solid black;'> 
                                                                         <td style='font-size: 13px; border-right: 2px solid black;text-align: center;'>1</td>
                                                                         <td style='font-size: 13px; text-align: left; border-right: 2px solid black;'>" + concepto1.ToString() + " " + CVH_FOLIO(0)(0).ToString() + "</td>
-                                                                        <td style='font-size: 13px; text-align: right; border-right: 2px solid black;'>" + (FormatCurrency(Convert.ToDouble(total1))).ToString() + "</td>
-                                                                        <td style='font-size: 13px; text-align: right;'>" + (FormatCurrency(Convert.ToDouble(total1))).ToString() + "</td>
+                                                                        <td style='font-size: 13px; text-align: right; border-right: 2px solid black;'> $ " + total1.ToString() + "</td>
+                                                                        <td style='font-size: 13px; text-align: right;'> $ " + total1.ToString() + "</td>
                                                                      </tr>
 
                                                                      <tr style='border-left: 2px solid black; border-right: 2px solid black;'> 
                                                                         <td style='font-size: 13px; border-right: 2px solid black;text-align: center;'>1</td>
                                                                         <td style='font-size: 13px; text-align: left; border-right: 2px solid black;'>" + concepto2.ToString() + " " + CVH_FOLIO(0)(0).ToString() + "</td>
-                                                                        <td style='font-size: 13px; text-align: right; border-right: 2px solid black;'>" + (FormatCurrency(Convert.ToDouble(total2))).ToString() + "</td>
-                                                                        <td style='font-size: 13px; text-align: right;'>" + (FormatCurrency(Convert.ToDouble(total2))).ToString() + "</td>
+                                                                        <td style='font-size: 13px; text-align: right; border-right: 2px solid black;'> $ " + total2.ToString() + "</td>
+                                                                        <td style='font-size: 13px; text-align: right;'> $ " + total2.ToString() + "</td>
                                                                      </tr>
                                                                       <tr> 
                                                                       <tr style='border: 2px solid black;'>
@@ -1359,11 +1393,9 @@ Namespace Controllers
                                                                <p style='font-size: 13px;'>" + AYT_DESCRIPCION.ToString() + "</p>     
                                                             </div>   
                                                             <div class='col-6' style='padding-left: 200px;'>
-                                                                <p style='font-size: 14px;'><b>SUBTOTAL:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + (FormatCurrency(Convert.ToDouble(AYT_IMPORTE))).ToString() + "</b></p>
-                                                                <p style='font-size: 14px;'><b>TOTAL A PAGAR:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + (FormatCurrency(Convert.ToDouble(AYT_IMPORTE))).ToString() + "</b></p>
+                                                                <p style='font-size: 14px;'><b>SUBTOTAL:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp $ " + (Convert.ToDouble(AYT_IMPORTE)).ToString("F2", culture) + "</b></p>
+                                                                <p style='font-size: 14px;'><b>TOTAL A PAGAR:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp $" + (Convert.ToDouble(AYT_IMPORTE)).ToString("F2", culture) + "</b></p>
                                                             </div>
-               
-
 
                                                             <div class='col-5' style='padding-left: 50px; padding-top: 40px;'> 
                                                                 <font face='Arial' size='3'><b>IMPORTE EN LETRA:</b></font><br>  
@@ -1371,7 +1403,7 @@ Namespace Controllers
                                                             <div class='col-8' style='padding-left: 50px; padding-bottom: 10px;'>
                                                                 <div style='border: 2px solid black; width: 100%; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'>
                                                             
-                                                             <font face='Arial' style='font-size: 12px;'>" & numero2letras.ToString() & " M.N.</font> 
+                                                             <font face='Arial' style='font-size: 12px;'>" & numero2letras.ToString() & " </font> 
 
                                                                 </div>
                 
@@ -1513,7 +1545,7 @@ Namespace Controllers
         '                                <div class='container-fluid'>
         '                                    <div class='row'>
         '                                        <div class='col-3 text-center' style='padding-top:30px;'>
-        '                                            <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+        '                                            <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
         '                                        </div>
         '                                        <div class='col-6 text-center' style='padding-top:50px;'>
         '                                            <font face='Arial' style='font-size: 22px;'><b>PRESIDENCIA MUNICIPAL LERDO DURANGO</b></font><br> 
@@ -1525,7 +1557,7 @@ Namespace Controllers
         '                                                                           P&nbsp;&nbsp;A&nbsp;&nbsp;G&nbsp;&nbsp;O</b></font><br><br>
         '                                        </div>
         '                                        <div class='col-3 text-center' style='padding-top:50px;'>
-        '                                            <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+        '                                            <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
         '                                            <font face='Arial' size='4'><b>N°</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Arial' color='red' size='4'><b>607" + String.Format("{0:000000}", FolioRecibo) + "</b></font>  
         '                                        </div>
         '                                    </div>
@@ -1554,10 +1586,10 @@ Namespace Controllers
         '                                    <br>
         '                                    <div class='row'>
         '                                        <div class='col-2' style='padding-left: 50px; padding-top: 38px;'>
-        '                                            <img alt='SAT' src='https://apir.grupoapd.mx/img/sat.jpg' width='120px'>
+        '                                            <img alt='SAT' src='C:\inetpub\API_LERDO_DIGITAL\img\sat.jpg' width='120px'>
         '                                        </div>
         '                                        <div class='col-9' style='padding-left: 5px;'>
-        '                                            <table class='table' style='border: 1px solid white;' background='https://apir.grupoapd.mx/img/lerdologoMA.jpeg'> 
+        '                                            <table class='table' style='border: 1px solid white;' background='C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg'> 
         '                                                <tbody>
         '                                                  <tr style='border: 2px solid black;'>
         '                                                    <td style='font-size: 13px; border-right: 2px solid black;'><b>CONCEPTO</b></td>
@@ -1758,7 +1790,7 @@ Namespace Controllers
         '                                <div class='container-fluid'>
         '                                    <div class='row'>
         '                                        <div class='col-3 text-center' style='padding-top:30px;'>
-        '                                            <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+        '                                            <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
         '                                        </div>
         '                                        <div class='col-6 text-center' style='padding-top:50px;'>
         '                                            <font face='Arial' style='font-size: 22px;'><b>PRESIDENCIA MUNICIPAL LERDO DURANGO</b></font><br> 
@@ -1770,7 +1802,7 @@ Namespace Controllers
         '                                                                           P&nbsp;&nbsp;A&nbsp;&nbsp;G&nbsp;&nbsp;O</b></font><br><br>
         '                                        </div>
         '                                        <div class='col-3 text-center' style='padding-top:50px;'>
-        '                                            <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+        '                                            <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
 
         '                                        </div>
         '                                    </div>
@@ -1799,10 +1831,10 @@ Namespace Controllers
         '                                    <br>
         '                                    <div class='row'>
         '                                        <div class='col-2' style='padding-left: 50px; padding-top: 38px;'>
-        '                                            <img alt='SAT' src='https://apir.grupoapd.mx/img/sat.jpg' width='120px'>
+        '                                            <img alt='SAT' src='C:\inetpub\API_LERDO_DIGITAL\img\sat.jpg' width='120px'>
         '                                        </div>
         '                                        <div class='col-9' style='padding-left: 5px;'>
-        '                                            <table class='table' style='border: 1px solid white;' background='https://apir.grupoapd.mx/img/lerdologoMA.jpeg'> 
+        '                                            <table class='table' style='border: 1px solid white;' background='C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg'> 
         '                                                <tbody>
         '                                                  <tr style='border: 2px solid black;'>
         '                                                    <td style='font-size: 13px; border-right: 2px solid black;'><b>CONCEPTO</b></td>
@@ -3248,7 +3280,6 @@ Namespace Controllers
         	                            </td>
                                     </tr>
                                   </table>
-
                                 </div>
                               </center>
                             </body>
@@ -3296,51 +3327,54 @@ Namespace Controllers
             End Try
         End Function
         Public Function letras(ByVal nCifra As Object) As String
-            ' Defino variables
-            Dim cifra, bloque, decimales, cadena As String
-#Disable Warning BC42024 ' Variable local sin usar: 'longituid'.
-            Dim longituid, posision, unidadmil As Byte
-#Enable Warning BC42024 ' Variable local sin usar: 'longituid'.
-            ' En caso de que unidadmil sea:
-            ' 0 = cientos
-            ' 1 = miles
-            ' 2 = millones
-            ' 3 = miles de millones
-            ' 4 = billones
-            ' 5 = miles de billones
-            ' Reemplazo el símbolo decimal por un punto (.) y luego guardo la parte entera y la decimal por separado
-            ' Es necesario poner el cero a la izquierda del punto así si el valor es de sólo decimales, se lo fuerza
-            ' a colocar el cero para que no genere error
-            cifra = Format(CType(nCifra, Decimal), "###############0.#0")
-            decimales = Mid(cifra, Len(cifra) - 1, 2)
-            cifra = Left(cifra, Len(cifra) - 3)
-            ' Verifico que el valor no sea cero
-            If cifra = "0" Then
-                Return IIf(decimales = "00", "cero", "cero con " & decimales & "/100")
-            End If
-            ' Evaluo su longitud (como mínimo una cadena debe tener 3 dígitos)
-            If Len(cifra) < 3 Then
-                cifra = Rellenar(cifra, 3)
-            End If
-            ' Invierto la cadena
-            cifra = Invertir(cifra)
-            ' Inicializo variables
-            posision = 1
-            unidadmil = 0
-            cadena = ""
-            ' Selecciono bloques de a tres cifras empezando desde el final (de la cadena invertida)
-            Do While posision <= Len(cifra)
-                ' Selecciono una porción del numero
-                bloque = Mid(cifra, posision, 3)
-                ' Transformo el número a cadena
-                cadena = Convertir(bloque, unidadmil) & " " & cadena.Trim
-                ' Incremento la cantidad desde donde seleccionar la subcadena
-                posision = posision + 3
-                ' Incremento la posisión de la unidad de mil
-                unidadmil = unidadmil + 1
-            Loop
+
+            Dim numero2letras = Mdl_Pagos.RECUPERA_VALOR_STRING("Select dbo.CantidadConLetra(" + nCifra + ")")
+            Return numero2letras
+            '            ' Defino variables
+            '            Dim cifra, bloque, decimales, cadena As String
+            '#Disable Warning BC42024 ' Variable local sin usar: 'longituid'.
+            '            Dim longituid, posision, unidadmil As Byte
+            '#Enable Warning BC42024 ' Variable local sin usar: 'longituid'.
+            '            ' En caso de que unidadmil sea:
+            '            ' 0 = cientos
+            '            ' 1 = miles
+            '            ' 2 = millones
+            '            ' 3 = miles de millones
+            '            ' 4 = billones
+            '            ' 5 = miles de billones
+            '            ' Reemplazo el símbolo decimal por un punto (.) y luego guardo la parte entera y la decimal por separado
+            '            ' Es necesario poner el cero a la izquierda del punto así si el valor es de sólo decimales, se lo fuerza
+            '            ' a colocar el cero para que no genere error
+            '            cifra = Format(CType(nCifra, Decimal), "###############0.#0")
+            '            decimales = Mid(cifra, Len(cifra) - 1, 2)
+            '            cifra = Left(cifra, Len(cifra) - 3)
+            '            ' Verifico que el valor no sea cero
+            '            If cifra = "0" Then
+            '                Return IIf(decimales = "00", "cero", "cero con " & decimales & "/100")
+            '            End If
+            '            ' Evaluo su longitud (como mínimo una cadena debe tener 3 dígitos)
+            '            If Len(cifra) < 3 Then
+            '                cifra = Rellenar(cifra, 3)
+            '            End If
+            '            ' Invierto la cadena
+            '            cifra = Invertir(cifra)
+            '            ' Inicializo variables
+            '            posision = 1
+            '            unidadmil = 0
+            '            cadena = ""
+            '            ' Selecciono bloques de a tres cifras empezando desde el final (de la cadena invertida)
+            '            Do While posision <= Len(cifra)
+            '                ' Selecciono una porción del numero
+            '                bloque = Mid(cifra, posision, 3)
+            '                ' Transformo el número a cadena
+            '                cadena = Convertir(bloque, unidadmil) & " " & cadena.Trim
+            '                ' Incremento la cantidad desde donde seleccionar la subcadena
+            '                posision = posision + 3
+            '                ' Incremento la posisión de la unidad de mil
+            '                unidadmil = unidadmil + 1
+            '            Loop
             ' Cargo la función
-            Return IIf(decimales = "00", cadena.Trim.ToLower, cadena.Trim.ToLower & " con " & decimales & "/100")
+            'Return IIf(decimales = "00", cadena.Trim.ToLower, cadena.Trim.ToLower & " con " & decimales & "/100")
         End Function
         Private Function Convertir(ByVal cadena As String, ByVal unidadmil As Byte) As String
             ' Defino variables
@@ -3492,5 +3526,69 @@ Namespace Controllers
 
             Return Convert.ToBase64String(bitmapBytes)
         End Function
+
+        ' ================================================= prueba de estructira del cambio.
+        <HttpGet>
+        <Route("api/pagos/testEstructuirapago")>
+        Public Function testEstructura(ByVal folio As String, ByVal correo As String, ByVal importe As String, ByVal iin_clave As String, foliorecibo As String)
+            Dim SqlString As String,
+                ES_MULTA As String,
+                html As String = ""
+
+            'Dim numero2letras = UCase(letras(importe))
+
+            Dim numero2letras = Mdl_Pagos.RECUPERA_VALOR_STRING("Select dbo.CantidadConLetra(" + importe + ")")
+            Dim CodigoBarras = generarCodigo(folio)
+            Dim QR = genera_QR(iin_clave)
+
+            SqlString = "EXEC PA_WEB_VERIFICAR_MUTLA_RETORNA_FORMATO_PAGO '" + folio + "'"
+
+            ES_MULTA = Mdl_Pagos.RECUPERA_VALOR_STRING(SqlString)
+            If (ES_MULTA = "-1") Then
+                html = "NO ES MULTA"
+            Else
+                html = ES_MULTA
+                html = html.Replace("[FECHA]", Format(Now, "dd/MM/yyyy hh:mm tt"))
+                html = html.Replace("[FOLIORECIBO]", foliorecibo)
+                html = html.Replace("[CODEQR]", QR)
+                html = html.Replace("[NUMERO_CON_LETRA]", numero2letras)
+                html = html.Replace("[CODE_BARRAS]", "data:image/jpg;base64, " + CodigoBarras)
+            End If
+
+
+            Dim htmlString As String = html
+            Dim pdf_page_size As String = "A4"
+            Dim pageSize As PdfPageSize = DirectCast([Enum].Parse(GetType(PdfPageSize),
+                            pdf_page_size, True), PdfPageSize)
+            Dim pdf_orientation As String = "Portrait"
+            Dim pdfOrientation As PdfPageOrientation = DirectCast(
+                            [Enum].Parse(GetType(PdfPageOrientation),
+                            pdf_orientation, True), PdfPageOrientation)
+            Dim webPageWidth As Integer = 1024
+            Try
+                webPageWidth = Convert.ToInt32(1024)
+            Catch
+            End Try
+            Dim webPageHeight As Integer = 0
+            Try
+                webPageHeight = Convert.ToInt32(768)
+            Catch
+            End Try
+
+            Dim converter As New HtmlToPdf()
+            converter.Options.PdfPageSize = pageSize
+            converter.Options.PdfPageOrientation = pdfOrientation
+            converter.Options.WebPageWidth = webPageWidth
+            converter.Options.WebPageHeight = webPageHeight
+            Dim doc As PdfDocument = converter.ConvertHtmlString(htmlString)
+            ' doc.Save(HttpContext.Current.Request.PhysicalApplicationPath + "Recibos\" & id_folio & ".pdf")
+            doc.Save(HttpContext.Current.Request.PhysicalApplicationPath + "documentacion\QR\recibos\TEST_" & folio & ".pdf")
+            doc.Close()
+
+            'Dim bool As Boolean = ENVIAR_CORREO("APD" & folio, folio, correo, "", "", "", "", HttpContext.Current.Request.PhysicalApplicationPath + "documentacion\QR\recibos\" & folio.Replace("-", "") & ".pdf")
+
+            Return html
+        End Function
+
     End Class
 End Namespace

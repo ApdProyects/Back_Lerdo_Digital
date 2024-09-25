@@ -356,7 +356,7 @@ Namespace Controllers
                                         <div class='container-fluid'>
                                             <div class='row'>
                                                 <div class='col-3 text-center' style='padding-top:30px;'>
-                                                    <img alt='Lerdo Digital' src='https://apir.grupoapd.mx/img/lerdologo.jpeg' width='200px'>
+                                                    <img alt='Lerdo Digital' src='C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg' width='200px'>
                                                 </div>
                                                 <div class='col-6 text-center' style='padding-top:50px;'>
                                                     <font face='Arial' style='font-size: 22px;'><b>PRESIDENCIA MUNICIPAL LERDO DURANGO</b></font><br> 
@@ -368,7 +368,7 @@ Namespace Controllers
                                                                                    P&nbsp;&nbsp;A&nbsp;&nbsp;G&nbsp;&nbsp;O</b></font><br><br>
                                                 </div>
                                                 <div class='col-3 text-center' style='padding-top:50px;'>
-                                                    <img alt='APD' src='https://apir.grupoapd.mx/img/apdlogo.png' width='190px'><br>
+                                                    <img alt='APD' src='C:\inetpub\API_LERDO_DIGITAL\img\apdlogo.png' width='190px'><br>
                                                    
                                                 </div>
                                             </div>
@@ -397,10 +397,10 @@ Namespace Controllers
                                             <br>
                                             <div class='row'>
                                                 <div class='col-2' style='padding-left: 50px; padding-top: 38px;'>
-                                                    <img alt='SAT' src='https://apir.grupoapd.mx/img/sat.jpg' width='120px'>
+                                                    <img alt='SAT' src='C:\inetpub\API_LERDO_DIGITAL\img\sat.jpg' width='120px'>
                                                 </div>
                                                 <div class='col-9' style='padding-left: 5px;'>
-                                                    <table class='table' style='border: 1px solid white;' background='https://apir.grupoapd.mx/img/lerdologoMA.jpeg'> 
+                                                    <table class='table' style='border: 1px solid white;' background='C:\inetpub\API_LERDO_DIGITAL\img\lerdologoMA.jpeg'> 
                                                         <tbody>
                                                           <tr style='border: 2px solid black;'>
                                                             <td style='font-size: 13px; border-right: 2px solid black;'><b>CONCEPTO</b></td>

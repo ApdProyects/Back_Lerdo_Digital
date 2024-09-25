@@ -395,31 +395,31 @@ Namespace Models
 
                 Using conn As New SqlConnection(ConnString)
                     Try
-                        Dim cmd As New SqlCommand("SELECT  VTA_02_VENTAS_DIARIAS_DET.AAR_DESCRIPCION  AS DESCRIPCION, 
-                                                           VTA_02_VENTAS_DIARIAS_DET.AAR_PRECIO_MAXIMO_PUBLICO  AS PRECIOUNITARIO, 
-                                                           VTA_02_VENTAS_DIARIAS_DET.VVT_GD_CANTIDAD  AS CANTIDAD, 
-                                                           0 AS TIPODESCUENTO, 
-                                                           VTA_02_VENTAS_DIARIAS_DET.VVT_GD_SUBTOTAL  AS IMPORTE, 
-                                                           FEL_03_UNIDAD_MEDIDA.FUM_NOMBRE  AS DESCRIPCIONUM, 
-                                                           VTA_02_VENTAS_DIARIAS_DET.VVD_CLAVE,
-                                                           PORCENTAJEIEPS=VVT_GD_IEPS_PORC,
-                                                           IMPORTEIEPS=VVT_GD_IEPS_IMPORTE,
-                                                           PORCENTAJEIVA=VVT_GD_IVA_PORC,
-                                                           IMPORTEIVA=VVT_GD_IVA_IMPORTE,
-                                                           CLAVEPRODUCTOSERVICIO=AAR_CODIGO_SAT,
-                                                           CODIGODEPRODUCTO=ALM_01_ARTICULOS.AAR_NOMBRE,
-                                                           CLAVEUNIDAD=FEL_03_UNIDAD_MEDIDA.FUM_UNIDAD,
-                                                           ALM_01_ARTICULOS.AAR_CLAVE,
-                                                           AAR_CODIGO_SAT,
-                                                           VVT_GD_DESC_IMPORTE,
-                                                           VTA_02_VENTAS_DIARIAS_DET.AAR_PRECIO_VENTA,
-														   ALM_01_ARTICULOS.AAR_OBJETO_IMP
+                        Dim cmd As New SqlCommand(" SELECT  VTA_02_VENTAS_DIARIAS_DET.AAR_DESCRIPCION  AS DESCRIPCION, 
+                                                        VTA_02_VENTAS_DIARIAS_DET.AAR_PRECIO_MAXIMO_PUBLICO  AS PRECIOUNITARIO, 
+                                                        VTA_02_VENTAS_DIARIAS_DET.VVT_GD_CANTIDAD  AS CANTIDAD, 
+                                                        0 AS TIPODESCUENTO, 
+                                                        VTA_02_VENTAS_DIARIAS_DET.VVT_GD_SUBTOTAL  AS IMPORTE, 
+                                                        FEL_03_UNIDAD_MEDIDA.FUM_NOMBRE  AS DESCRIPCIONUM, 
+                                                        VTA_02_VENTAS_DIARIAS_DET.VVD_CLAVE,
+                                                        PORCENTAJEIEPS=VVT_GD_IEPS_PORC,
+                                                        IMPORTEIEPS=VVT_GD_IEPS_IMPORTE,
+                                                        PORCENTAJEIVA = VVT_GD_IVA_PORC,
+                                                        IMPORTEIVA=VVT_GD_IVA_IMPORTE,
+                                                        CLAVEPRODUCTOSERVICIO=AAR_CODIGO_SAT,
+                                                        CODIGODEPRODUCTO=ALM_01_ARTICULOS.AAR_NOMBRE,
+                                                        CLAVEUNIDAD=FEL_03_UNIDAD_MEDIDA.FUM_UNIDAD,
+                                                        ALM_01_ARTICULOS.AAR_CLAVE,
+                                                        AAR_CODIGO_SAT,
+                                                        VVT_GD_DESC_IMPORTE,
+                                                        VTA_02_VENTAS_DIARIAS_DET.AAR_PRECIO_VENTA,
+													    ALM_01_ARTICULOS.AAR_OBJETO_IMP
                                                     FROM [VTA_02_VENTAS_DIARIAS_DET]
-                                                     INNER JOIN [ALM_01_ARTICULOS] 
-                                                        ON VTA_02_VENTAS_DIARIAS_DET.AAR_CLAVE = ALM_01_ARTICULOS.AAR_CLAVE 
-                                                     INNER JOIN [FEL_03_UNIDAD_MEDIDA]
-                                                        ON ALM_01_ARTICULOS.FUM_CLAVE = FEL_03_UNIDAD_MEDIDA.FUM_CLAVE 
-                                                   WHERE (VTA_02_VENTAS_DIARIAS_DET.VVD_CLAVE = " & FE_VVD_CLAVE & ")", conn)
+                                                        INNER JOIN [ALM_01_ARTICULOS] 
+                                                           ON VTA_02_VENTAS_DIARIAS_DET.AAR_CLAVE = ALM_01_ARTICULOS.AAR_CLAVE 
+                                                        INNER JOIN [FEL_03_UNIDAD_MEDIDA]
+                                                           ON ALM_01_ARTICULOS.FUM_CLAVE = FEL_03_UNIDAD_MEDIDA.FUM_CLAVE 
+                                                    WHERE (VTA_02_VENTAS_DIARIAS_DET.VVD_CLAVE = " & FE_VVD_CLAVE & ")", conn)
                         cmd.CommandType = CommandType.Text
 
                         Dim da As New SqlDataAdapter(cmd)
@@ -1089,7 +1089,6 @@ Namespace Models
 
                         ' Executar este para validar facturacion cuando es tema de fechas:
                         'Dim cmd As New SqlCommand("EXECUTE [SRV_VIALIDAD].[APDSGEDB_PL].[DBO].PA_VALIDA_FACTURACION_MODIFICACION_FECHAS '" + folio + "'", conn)
-
 
                         Dim cmd As New SqlCommand("EXECUTE [SRV_VIALIDAD].[APDSGEDB_PL].[DBO].[PA_VALIDA_FACTURACION] '" + folio + "'", conn)
                         cmd.CommandType = CommandType.Text

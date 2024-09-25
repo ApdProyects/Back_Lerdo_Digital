@@ -85,7 +85,7 @@ Namespace Controllers
                             "&url=" + urlImagen +
                             "&Caption=" + caption +
                             "&description=" + description +
-                       "&url_thumb=https://apir.grupoapd.mx/img/lerdologo.jpeg"
+                       "&url_thumb=C:\inetpub\API_LERDO_DIGITAL\img\lerdologo.jpeg"
 
 
                     api = New WebClient()
