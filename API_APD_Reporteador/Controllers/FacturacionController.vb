@@ -289,7 +289,7 @@ Namespace Controllers
 
             folio_pago = Folio.Substring(3, (Folio.Count() - 3))
             Try
-                If (Folio.Count() = 11 Or Folio.Count() = 13 Or Folio.Count() = 16 Or Folio.Count() = 17) Then
+                If (Folio.Count() = 11 Or Folio.Count() = 13 Or Folio.Count() = 16 Or Folio.Count() = 17 Or Folio.Count() = 18) Then
 
                     Cs_folio_fac = Mdl_Facturacion.Recupera_Folio(folio_pago)
                     respuesta_sp = Mdl_Facturacion.VALIDA_FACTURACION(folio_pago)
@@ -1220,7 +1220,7 @@ Namespace Controllers
             ''logitud de folio ingreso
             For i = 0 To UBound(FolioAr)
                 folio = FolioAr(i)
-                If (folio.Count() = 11 Or folio.Count() = 13 Or folio.Count() = 16 Or folio.Count() = 17) Then
+                If (folio.Count() = 11 Or folio.Count() = 13 Or folio.Count() = 16 Or folio.Count() = 17 Or folio.Count() = 18) Then
                     folio_fac = folio.Substring(3, (folio.Count() - 3))
                     Cs_folio_fac = Mdl_Facturacion.Recupera_Folio(folio_fac)
                     respuesta_sp = Mdl_Facturacion.VALIDA_FACTURACION(folio_fac)

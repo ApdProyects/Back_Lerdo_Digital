@@ -52,6 +52,7 @@ Namespace Controllers
         Public Function genera_recibo(ByVal id_folio As String, ByVal id_concepto As Integer, ByVal id_depto As Integer, ByVal usuario As String,
                                       ByVal RESULTADO_PAYW As String, ByVal ID_AFILIACION As String, ByVal FECHA_RSP_CTE As DateTime, ByVal CODIGO_AUT As String,
                                       ByVal REFERENCIA As String, ByVal FECHA_REQ_CTE As DateTime, ByVal Set_Cookie As String, ByVal pago As String, ByVal correo As String) As Cs_Respuesta_pago
+
             Dim Cs_Pago As New Cs_Pago
             Dim Cs_Respuesta_pago As New Cs_Respuesta_pago
             Dim Cs_InfoFolio As New ArrayList
@@ -85,6 +86,8 @@ Namespace Controllers
 
                 ' Cs_Respuesta_pago = Mdl_Pagos.GuardaPagoCatastro(Cs_Pago, id_depto, id_concepto)
                 ' Cs_Respuesta_pago = Mdl_Pagos.GeneraCobroCatastro(Cs_Pago)
+
+                'Cs_Respuesta_pago.folio = "11610683"
 
                 Dim IIN_CLAVE As String = Cs_Respuesta_pago.folio ' 27257
 
